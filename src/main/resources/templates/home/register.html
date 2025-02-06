@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>미니박스</title>
+    <link rel="shotcut icon" th:href="@{'/assets/images/favicon.ico'}">
+    <link rel="stylesheet" th:href="@{'/assets/styles/common.css'}" type="text/css">
+    <link rel="stylesheet" th:href="@{'/assets/styles/register-com.css'}" type="text/css">
+    <script th:src="@{'/assets/scripts/common.js'}" type="text/javascript"></script>
+    <script defer th:src="@{'/assets/scripts/register.js'}" type="text/javascript"></script>
+</head>
+<body>
+
+<div class="member-wrap join -visible">
+    <h1>
+        <a th:href="@{'/'}"><img th:src="@{'/assets/images/logo_new1.png'}" alt="mini-box"></a>
+    </h1>
+    <div class="members">
+        <ul>
+            <li class="on">STEP1. 본인인증</li>
+            <li>STEP2. 약관동의</li>
+            <li>STEP3. 정보입력</li>
+            <li>STEP4. 가입완료</li>
+        </ul>
+    </div>
+
+    <p>회원가입을 위한 본인인증 단계입니다.</p>
+    <div class="txt-wrap">
+            <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGQAAABkCAYAAABw4pVUAAAACXBIWXMAAAsTAAALEwEAmpwYAAAEHUlEQVR4nO2bWagXVRzHPze1LLcWS3O3hYyK3NBUFFFDC7UiiiJNogV66rHXHsU3H3pQEUURjcQNF1SEsqIoKlqvJtU1bXUpc71uVwZm4CJz5v+//zsz53fmfj9w4P8w/7N9zpw553dmQAghhBBCCCGEEEIIIUQ1aFPCUh94r4ASEtJmeCB4r4AS2UJEudS8Q0S5SIgxJMQYEhKakCVAN9+17AJ0i/u6rmXvh8AA3zWuMHcAezq6DzkCTPRd8woyBvil0Y3hBeA13y2oEAuAs3ns1JcBN/puTcB0BxY3Gjp513HhJ8Ag3y0LkEFx37XV2depO/WXHLfWP8AMv+0LiinAHyn9eB54taP7kNGOh88l4G0/7QuKN4DWlP77DZjQ6MYwWp7tdtxu64Bbym1jEPQEVjr67APgruuu75CQZAPzDnAl5dqvgXvKaWcQDAU+T+mnq8DS+OFOZ4UkzAP+S7n+BDC7uDYGw3Tg75T+OQ08l/G/hoVEPAD84BgB0bLuBroeTfEz9XJKv/wEPFzj/50SEtEH2OiYI7cB/eg69Abed/TFduDWOvLotJBao+Ig8BDV537g+xxmi1yEJMyJnyHX5/E/8CzVZS7wb0q7TwFPdTCvXIVEDAO+yBgpVQrlN8UzQ9qK8xvg3gbyzF1IsvZe5ZhLdwG3Ez59gS2ONq4HejWYbyFC2u9OL6bkeRgYT7g8CvxcUNSiUCERU4E/HfGbVwiPF4EzKe05BszMIf/ChUQMBj7NCOX3IOyQ+ZfA8JzKKUVIxE1xuCCtQR8BA7FLf2Cfo+5rgJtzLKs0IQkLgXMp5RwFJmGPcUCL4/T09QLKK11IxFjgV0cj38IOL2cMnscKKtOLkGQa2FvSNNDI9LrcUbf9BU+v3oQQbxIXx5vGtAflCMrH9wLEq5CEFzKWkrMoj2kZS/RFJdXBhJCIUUBzSvmX481WFKYoEtcm9hDwCOVhRkgSjtjsmC42dCIcUSvMs9pR5k7gNsrFlJBaAbvm+E7Ki/uAb40dsJkTkvBkRkj76RzyfwI46TgqeAZ/mBWSjODvch7BWXfgAeBB/GJaSHIs+p5jjt9R57Fo++PmTY68tho5bjYvpJ5VUK0XB5IXMn70uIqrnJBkn/CX49Wa53Ez3/HK0nHgcWwRlJCIIcBnde6ksyIBXwEjsUdwQpJY04oaX3tlfZW01vBrr0EKSXjT8QJziyNk3hr/xzJBCyE+mz/suBPap9+BydgneCERd2ac6EXpY+BuwqASQrLOvEP7/K4yQmj3tdfR+Kvh6HdoVE5I6EiIMSTEGBJiDAkxhoQYQ0KMISHGkBBjSIgxJMQYEmIMCTGGhBhDQowhIcaQEGNISGhClPDaBxKArT7wXgElJKTN8EAQQgghhBBCCCGEEEIIQehcA+fQ76nR3elUAAAAAElFTkSuQmCC" alt="new-post--v1">
+            <span>이메일 인증</span>
+    </div>
+
+    <ul>
+        <li>본인인증 시 제공되는 정보는 해당 인증기관에서 직접 수집하며, 인증 이외의 용도로 이용 또는 저장되지 않습니다.</li>
+    </ul>
+    <div class="button-wrap">
+        <a th:href="@{'/'}"><button class="--button -gray">취소</button></a>
+    </div>
+
+</div>
+
+<div class="member-wrap agree">
+    <h1>
+        <a th:href="@{'/'}"><img th:src="@{'/assets/images/logo_new1.png'}" alt=""></a>
+    </h1>
+    <div class="members">
+        <ul>
+            <li>STEP1. 본인인증</li>
+            <li class="on">STEP2. 약관동의</li>
+            <li>STEP3. 정보입력</li>
+            <li>STEP4. 가입완료</li>
+        </ul>
+    </div>
+
+    <p>약관동의 및 정보활용동의</p>
+    <span>미니박스 서비스 이용을 위한 약관에 동의해주세요.</span>
+
+<!--    <div class="-underline">-->
+<!--        <label>-->
+<!--            <input type="checkbox">-->
+<!--            <span>필수항목 전체동의</span>-->
+<!--        </label>-->
+<!--    </div>-->
+    <div class="txt-wrap">
+        <label>
+            <input class="serviceCheck" name="serviceCheck" type="checkbox">
+            <span>서비스 이용 약관 동의(필수)</span>
+        </label>
+        <label>
+            <textarea>
+        제 1조. 목적
+
+본 약관은 미니박스중앙(주)(이하 "회사"라 합니다)가 제공하는 온라인, 오프라인 서비스(이하 "서비스"라 합니다) 이용과 관련하여 회사와 이용자의 권리, 의무 및 책임사항을 규정함을 목적으로 합니다.
+
+        제 2조. 약관의 효력 및 변경
+
+        1. 본 약관은 서비스를 이용하고자 본 약관에 동의한 모든 회원에 대하여 그 효력을 발생합니다.
+        2. 본 약관의 내용은 회원(서비스)가입 시 게재되거나 공지된 내용에 회원이 동의함으로써 그 효력이 발생합니다.
+        3. 회사는 합리적인 사유가 발생될 경우 본 약관을 변경(수정 또는 개정)할 수 있으며, 약관을 개정할 경우 회사는 시행일 및 개정 사유를 명시하여 현행 약관과 함께 시행일로부터 최소 7일 전, 고객에게 불리하게 변경되거나 중요한 내용인 경우에는 최소 30일 전에 회사의 웹사이트 또는 전자메일 등을 통해 공지합니다.
+        4. 회원은 변경된 약관에 동의하지 않을 경우 회원 탈퇴를 요청할 수 있으며, 변경된 약관의 효력 발생일 이후 탈퇴 요청을 하지 않을 경우 약관의 변경 사항에 동의한 것으로 간주됩니다.
+
+        제 3조. 약관 외 준칙
+
+        1. 본 약관에 명시되지 아니한 사항에 대해서는 전자상거래 등에서의 소비자보호에 관한 법률, 정보통신망 이용촉진 및 정보보호 등에 관한 법률 및 기타 관련 법령의 규정에 따릅니다.
+        2. 본 약관에 명시되지 않은 서비스에 대한 사항은 당사 홈페이지, 모바일 또는 영화관 현장을 통한 해당 서비스 공지사항에 따릅니다.
+
+        제 4조. 용어의 정의
+
+        본 약관에서 사용하는 주요한 용어의 정의는 다음과 같습니다.
+        1. "사이트" : 회사가 재화·용역·정보를 회사에게 제공하기 위하여 컴퓨터 등 정보통신 설비를 이용하여 재화·용역을 거래할 수 있도록 설정한 가상의 영업장 또는 회사가 운영하는 웹사이트(홈페이지, 모바일 웹/어플리케이션, SNS 등)를 말하며, 아울러 사이트를 운영하는 사업자의 의미로도 사용합니다.
+        2. "회원" : 본 약관을 인지하고, 본인인증절차를 거쳐 회사에 개인정보를 제공하여 회원으로서 등록하여 회사 아이디(ID)와 멤버십 카드를 부여 받은 자로서, 정상적으로 미니박스 서비스를 이용할 수 있는 권한을 부여 받은 고객을 말합니다.
+        3. "아이디" : 회원의 식별과 회원의 서비스 이용을 위하여 회원이 선정하고 회사가 승인하는 문자나 숫자 혹은 그 조합을 말합니다(이하"ID"라 합니다).
+        4. "비밀번호" : 회원이 부여 받은 ID와 일치된 회원임을 확인하고, 회원 자신의 비밀을 보호하기 위하여 회원이 정한 문자와 숫자의 조합을 말합니다.
+        5. "서비스" : 회사가 회원을 위하여 유료 또는 무료로 제공하는 행위 또는 그 행위 대상인 유, 무형의 물건 자체를 의미하며 온/오프라인에서 이루어지는 영화 관람, 포인트 적립, 사용, 할인, 이벤트 참여 등의 전반적인 고객 서비스 프로그램을 말합니다.
+        6. "멤버십 포인트" : 회사에서 재화/서비스 구매 시 적립/사용이 가능하도록 제공하는 포인트를 말합니다.
+        7. "이용중지" : 회사가 약관에 의거하여 회원의 서비스 이용을 제한하는 것을 말합니다.
+        8. "해지" : 회사 또는 회원이 서비스 사용 후 이용계약을 해약하는 것을 말합니다.
+
+        제 5조. 회원 가입 및 카드 발급
+
+        1. 회원 가입은 회사가 운영하는 사이트를 통해 가능하며, 서비스 가입 신청 시 본 약관과 개인정보 처리방침(‘개인정보수집 및 이용안내’ 및 ‘마케팅 활용 동의’ 등)에 동의함으로써 회원 가입을 신청합니다.
+        2. 고객으로부터 회원 가입 신청이 있는 경우 회사는 자체 기준에 따른 심사를 거친 후 고객에게 회원 자격을 부여 할 수 있으며 회원 자격이 부여된 고객은 회사로부터 가입 완료 공지를 받은 시점부터 회원으로서의 지위를 취득하고 멤버십 카드를 즉시 발급받을 수 있습니다.
+        3. 관계 법령에 따라 만14세 미만의 아동은 온라인으로 타인에게 개인정보를 보내기 전에 반드시 개인정보의 수집 및 이용목적에 대하여 충분히 숙지하고 법정대리인(부모)의 동의를 받아야 합니다.
+    </textarea>
+        </label>
+        <label>
+            <input class="agreeCheck" name="agreeCheck" type="checkbox">
+            <span>개인정보 수집 및 이용 동의(필수)</span>
+        </label>
+        <label>
+            <textarea>
+미니박스중앙(주)(이하 "회사")는 다음의 목적을 위하여 개인정보를 처리합니다. 처리하고 있는 개인정보는 다음의 목적 이외의 용도로는 이용되지 않으며, 이용 목적이 변경되는 경우에는 개인정보 보호법 제18조에 따라 별도의 동의를 받는 등 필요한 조치를 이행할 예정입니다.
+
+        1. 필수 입력(수집) 항목
+        구분	수집항목	수집 및 이용 목적
+        회원 서비스 제공 및 관리 필수 수집 항목	성명, 생년월일, 성별, 본인인증정보(CI, DI), 아이핀 번호(아이핀 본인 인증일 경우), 아이디, 비밀번호, 휴대폰번호, 이메일	-미니박스 상품 구매에 대한 결제 및 예매 확인
+        -회원 서비스 이용에 따른 본인 식별 및 실명 여부, 중복 가입 여부 확인
+        -멤버십 서비스 제공 및 이벤트 시 활용
+        -공지사항 전달, 문의 또는 불만 처리 등을 위한 원활한 의사소통 경로의 확보
+        -드림센터 운영
+        만 14세 미만 법정대리인의 이름, 휴대폰번호, CI	-만 14세 미만 아동의 고객 가입을 위한 법정대리인 동의 여부 확인
+        모바일 서비스 이용 위한 필수 수집 항목	모바일 단말기기정보(모델명, OS종류, OS버전 정보)	-공지사항 전달, 문의 또는 불만 처리 등을 위한 원활한 의사소통 경로의 확보
+        -개인정보 침해 사고에 대한 대비, 분쟁 조정을 위한 기록 보존
+    </textarea>
+        </label>
+        <div class="button-wrap">
+            <button class="--button -purple">확인</button>
+            <a th:href="@{'/'}"><button class="--button -gray">취소</button></a>
+        </div>
+    </div>
+</div>
+
+<div class="member-wrap main">
+    <h1>
+        <a th:href="@{'/'}"><img th:src="@{'/assets/images/logo_new1.png'}" alt=""></a>
+    </h1>
+    <div class="members">
+        <ul>
+            <li>STEP1. 본인인증</li>
+            <li>STEP2. 약관동의</li>
+            <li class="on">STEP3. 정보입력</li>
+            <li>STEP4. 가입완료</li>
+        </ul>
+    </div>
+
+    <p>회원정보를 입력해주세요.</p>
+    <form class="register-form" id="registerForm">
+        <table>
+            <tbody>
+            <tr>
+                <th>이메일</th>
+                <td>
+                    <label class="--obj-label" data-id="email">
+                        <input autofocus autocomplete="email" maxlength="50" minlength="8" name="email" placeholder="이메일 ex)example@mini.com" type="email">
+                        <span class="_warning">올바른 이메일을 입력해 주세요.</span>
+                    </label>
+                </td>
+            </tr>
+            <tr>
+                <th>비밀번호</th>
+                <td>
+                    <label class="--obj-label" data-id="password">
+                        <input maxlength="50" minlength="6" name="password" placeholder="비밀번호 입력" type="password">
+                        <span class="_warning">올바른 비밀번호를 입력해 주세요.</span>
+                    </label>
+                </td>
+            </tr>
+            <tr>
+                <th>비밀번호 확인</th>
+                <td>
+                    <label class="--obj-label" data-id="passwordCheck">
+                        <input name="passwordCheck" placeholder="비밀번호 재입력" type="password">
+                        <span class="_warning">비밀번호가 일치하지 않습니다.</span>
+                    </label>
+                </td>
+            </tr>
+            <tr>
+                <th>닉네임</th>
+                <td>
+                    <label class="--obj-label" data-id="nickname">
+                        <input name="nickname" maxlength="10" minlength="2" placeholder="닉네임 입력" type="text">
+                        <span class="_warning">올바른 닉네임을 입력해 주세요.</span>
+                    </label>
+                </td>
+            </tr>
+            <tr>
+                <th>휴대폰 번호</th>
+                <td>
+                    <label class="--obj-label" data-id="contact">
+                        <input name="contact" maxlength="11" minlength="10" placeholder="'-'없이 입력 ex)01012345678" type="tel">
+                        <span class="_warning">올바른 연락처를 입력해 주세요.</span>
+                    </label>
+                </td>
+            </tr>
+            <tr>
+                <th>생년월일</th>
+                <td>
+                    <label class="--obj-label" data-id="birthdate">
+                        <input name="birthdate" placeholder="생년월일 8자리 ex) 19990909" type="date">
+                        <span class="_warning">올바른 생년월일를 입력해 주세요.</span>
+                    </label>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+        <div class="button-wrap">
+            <button class="--button -purple" type="submit">회원가입</button>
+            <a th:href="@{'/'}"><button class="--button -gray" type="button">취소</button></a>
+        </div>
+    </form>
+</div>
+
+<div class="member-wrap success">
+    <h1>
+        <a th:href="@{'/'}"><img th:src="@{'/assets/images/logo_new1.png'}" alt=""></a>
+    </h1>
+    <div class="members">
+        <ul>
+            <li>STEP1. 본인인증</li>
+            <li>STEP2. 약관동의</li>
+            <li>STEP3. 정보입력</li>
+            <li class="on">STEP4. 가입완료</li>
+        </ul>
+    </div>
+
+    <p>회원가입해 주셔서 감사합니다.</p>
+    <div>입력하신 이메일로 계정을 인증할 수 있는 링크를 전송하였습니다.</div>
+    <div><b>계정 인증 후 로그인할 수 있으며,</b> 해당 링크는 24시간 동안만 유효하니 유의해 주세요.</div>
+
+    <div class="button-wrap">
+        <a th:href="@{'/'}"><button class="--button -purple">메인으로</button></a>
+    </div>
+
+</div>
+
+</body>
+</html>

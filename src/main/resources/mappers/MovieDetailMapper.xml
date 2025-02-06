@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="dev.mini.minibox.mappers.MovieDetailMapper">
+    <insert id="insertMovieInfo" parameterType="dev.mini.minibox.entities.MovieDetailEntity">
+        INSERT INTO `mega`.`movies` (`id`, `movieCd`, `movieNm`, `movieNmEn`, `showTypes`, `directors`, `actors`,
+                                     `genres`, `showTm`, `watchGradeNm`, `openDt`, `prdtStatNm`, `typeNm`, `nationNm`,
+                                     `poster`, `content`)
+        VALUES (#{id}, #{movieCd}, #{movieNm}, #{movieNmEn}, #{showTypes}, #{directors}, #{actors}, #{genres},
+                #{showTm}, #{watchGradeNm}, #{openDt}, #{prdtStatNm}, #{typeNm}, #{nationNm}, #{poster}, #{content})
+        ON DUPLICATE KEY UPDATE `movieNm`      = values(`movieNm`),
+                                `movieNmEn`    = values(`movieNmEn`),
+                                `showTypes`    = values(`showTypes`),
+                                `directors`    = values(`directors`),
+                                `actors`       = values(`actors`),
+                                `genres`       = values(`genres`),
+                                `showTm`       = values(`showTm`),
+                                `watchGradeNm` = values(`watchGradeNm`),
+                                `openDt`       = values(`openDt`),
+                                `prdtStatNm`   = values(`prdtStatNm`),
+                                `typeNm`       = values(`typeNm`),
+                                `nationNm`     = values(`nationNm`),
+                                `poster`       = values(`poster`),
+                                `content`      = values(`content`)
+    </insert>
+
+    <select id="findByMovieCd" resultType="dev.mini.minibox.entities.MovieDetailEntity">
+        SELECT `id`           AS `id`,
+               `movieCd`      AS `movieCd`,
+               `movieNm`      AS `movieNm`,
+               `movieNmEn`    AS `movieNmEn`,
+               `showTypes`    AS `showTypes`,
+               `directors`    AS `directors`,
+               `actors`       AS `actors`,
+               `genres`       AS `genres`,
+               `showTm`       AS `showTm`,
+               `watchGradeNm` AS `watchGradeNm`,
+               `openDt`       AS `openDt`,
+               `prdtStatNm`   AS `prdtStatNm`,
+               `typeNm`       AS `typeNm`,
+               `nationNm`     AS `nationNm`,
+               `poster`       AS `poster`,
+               `content`      AS `content`
+        FROM `mega`.`movies`
+        WHERE `movieCd` = #{movieCd}
+    </select>
+
+    <select id="selectMovieByMovieCd" resultType="dev.mini.minibox.entities.MovieDetailEntity">
+        SELECT `id`           AS `id`,
+               `movieCd`      AS `movieCd`,
+               `movieNm`      AS `movieNm`,
+               `movieNmEn`    AS `movieNmEn`,
+               `showTypes`    AS `showTypes`,
+               `directors`    AS `directors`,
+               `actors`       AS `actors`,
+               `genres`       AS `genres`,
+               `showTm`       AS `showTm`,
+               `watchGradeNm` AS `watchGradeNm`,
+               `openDt`       AS `openDt`,
+               `prdtStatNm`   AS `prdtStatNm`,
+               `typeNm`       AS `typeNm`,
+               `nationNm`     AS `nationNm`,
+               `poster`       AS `poster`,
+               `content`      AS `content`
+        FROM `mega`.`movies`
+        WHERE `movieCd` = #{movieCd}
+    </select>
+
+    <select id="selectMoviePosterByMovieCd" resultType="java.lang.String">
+        SELECT `poster` AS `poster`
+        FROM `mega`.`movies`
+        WHERE `movieCd` = #{movieCd}
+    </select>
+
+    <select id="selectMovieBoxOffice" resultType="java.lang.String">
+        SELECT `rank` AS `rank`
+        FROM `mega`.`boxOffice` AS b
+                 JOIN `mega`.`movies` AS m
+                      ON b.movieCd = m.movieCd
+        WHERE m.`movieCd` = #{movieCd}
+    </select>
+
+    <select id="selectMovieAudiAcc" resultType="java.lang.String">
+        SELECT `audiAcc` AS `audiAcc`
+        FROM `mega`.`boxOffice` AS b
+                 JOIN `mega`.`movies` AS m
+                      ON b.movieCd = m.movieCd
+        WHERE m.`movieCd` = #{movieCd}
+    </select>
+
+    <select id="selectWatchGrade" resultType="java.lang.String">
+        SELECT `watchGradeNm` AS `watchGradeNm`
+        FROM `mega`.`boxOffice` AS b
+                 JOIN `mega`.`movies` AS m
+                      ON b.movieCd = m.movieCd
+        WHERE m.`movieCd` = #{movieCd}
+    </select>
+
+    <select id="selectReserveCountByMovieNm" resultType="int">
+        SELECT COUNT(*)
+        FROM `mega`.`bookings` AS b
+                 JOIN `mega`.`schedules` AS sc
+                      ON b.`schedule_id` = sc.`id`
+                 JOIN `mega`.`seats` AS se
+                      ON b.`seat_id` = se.`id`
+        WHERE sc.`movie_nm` = #{movieNm}
+    </select>
+
+    <select id="selectReserveCountAll" resultType="int">
+        SELECT COUNT(*)
+        FROM `mega`.`bookings`
+    </select>
+
+    <select id="selectAllMovieNms" resultType="java.lang.String">
+        SELECT `movieNm` AS `movieNm`
+        FROM `mega`.`movies`
+    </select>
+</mapper>

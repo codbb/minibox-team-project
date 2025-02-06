@@ -1,0 +1,1063 @@
+@charset "UTF-8";
+
+@import url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css");
+
+@import "./global";
+
+body {
+  overflow: auto;
+  overflow-y: scroll;
+  letter-spacing: 0;
+  line-height: 1.5;
+  font-size: 1rem;
+  font-weight: 400;
+  color: #444444;
+  font-family: "Pretendard Variable", "Pretendard", -apple-system, "BlinkMacSystemFont", "system-ui", "Roboto", "Helvetica Neue", "Segoe UI", "Apple SD Gothic Neo", "Noto Sans KR", "Malgun Gothic", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+div {
+  display: block;
+  unicode-bidi: isolate;
+}
+
+.--button.-purple {
+  margin: 1rem;
+}
+
+.inner-wrap {
+  width: 1100px;
+  margin: 0 auto calc(-1 * 12.5rem);
+  min-height: calc(100vh - var(--header-height));
+  padding: 2rem 0 12.5rem;
+
+  > .quick-reserve {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 5rem;
+  }
+}
+
+.inner-wrap:after, .inner-wrap:before {
+  content: '';
+  display: table;
+}
+
+.quick-reserve .tit-util {
+  padding-bottom: 1.563rem;
+
+  .tit {
+    padding-top: 0.313rem;
+    padding-bottom: 0;
+  }
+}
+
+.tit-util:after, .tit-util:before {
+  content: '';
+  display: block;
+}
+
+.tit-util .tit {
+  float: left;
+  padding: 0 !important;
+  line-height: 1.1;
+}
+
+h2.tit {
+  padding: 0 0 1.625rem 0;
+  font-size: 1.8666rem;
+  font-weight: 400;
+  letter-spacing: -1px;
+  line-height: 1.1;
+  color: #222222;
+}
+
+.quick-reserve-include {
+  display: flex;
+  flex-direction: column;
+  gap: 0.625rem;
+  width: 1100px;
+  margin: 0 auto;
+  padding: 0;
+  background-color: #ffffff;
+}
+
+.time-schedule {
+  width: 100%;
+
+  .wrap {
+    display: flex;
+    align-items: center;
+    height: 4.563rem;
+    border: 0.063rem solid #d8d9db;
+    border-right: 0;
+    border-left: 0;
+    position: relative;
+  }
+
+  .date-list {
+    width: 90rem;
+    overflow: hidden;
+    float: left;
+    height: 4.5rem;
+  }
+
+  .date-area {
+    height: 4.563rem;
+    float: left;
+
+    .time-box {
+      height: 4.563rem;
+      float: left;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 10px;
+      border: 1px solid #ccc;
+      background-color: #f9f9f9;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    .time-box.active {
+      background-color: #503396;
+      color: white;
+      border: 1px solid #503396;
+    }
+
+    .time-box.saturday div:first-child {
+      color: blue;
+    }
+
+    .time-box.sunday div:first-child {
+      color: red;
+    }
+
+    button {
+      height: 2.438rem;
+      font-size: 0.8667rem;
+      border-bottom: 0.125rem solid #503396;
+    }
+  }
+}
+
+.time-schedule:after, .time-schedule:before {
+  content: '';
+  display: table;
+}
+
+.time-schedule .btn-next, .time-schedule .btn-pre {
+  width: 1.875rem;
+  height: 4.563rem;
+  border: 0 !important;
+  background-color: transparent !important;
+  float: left;
+}
+
+.time-schedule .btn-next em, .time-schedule .btn-pre em {
+  text-indent: -10000px;
+  font-size: 0;
+  padding: 0;
+  margin: 0;
+}
+
+.time-schedule .ico-cld-pre {
+  margin-right: 0.063rem;
+}
+
+
+.time-schedule .ico-cld-next {
+  margin-left: 0.063rem;
+}
+
+.ico-cld-pre {
+  width: 0.438rem;
+  height: 0.75rem;
+  background-image: url("https://img.megabox.co.kr/static/pc/images/common/ico/ico-cld-pre.png");
+}
+
+.ico-cld-next {
+  width: 0.438rem;
+  height: 0.75rem;
+  background-image: url("https://img.megabox.co.kr/static/pc/images/common/ico/ico-cld-next.png");
+}
+
+.time-schedule.quick {
+  .wrap {
+    display: flex;
+    align-items: center;
+    height: 2.5rem;
+    border-top: 0.063rem solid #555555;
+    border-left: 0.063rem solid #d8d9db;
+    border-right: 0.063rem solid #d8d9db;
+  }
+
+  .date-list {
+    height: 2.438rem;
+  }
+
+  .date-area {
+    height: 2.438rem;
+    float: left;
+
+    .time-box {
+      height: 2.438rem;
+      float: left;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 10px;
+      border: 1px solid #ccc;
+      background-color: #f9f9f9;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    .time-box.active {
+      background-color: #6200ee;
+      color: white;
+      border: 1px solid #6200ee;
+    }
+
+    .time-box.saturday div:first-child {
+      color: blue;
+    }
+
+    .time-box.sunday div:first-child {
+      color: red;
+    }
+
+    button.on {
+      background-color: #f7f8f9;
+      border-bottom: 0.125rem solid #503396;
+    }
+  }
+
+}
+
+.time-schedule.quick .btn-next, .time-schedule.quick .btn-pre {
+  height: 2.438rem;
+}
+
+.quick-reserve-area {
+  border: 0.063rem solid #d8d9db;
+  border-top: 0;
+
+  .movie-choice {
+    position: relative;
+    float: left;
+    width: 16.875rem;
+    height: 33.063rem;
+    padding: 0 1.25rem 1.063rem 1.25rem;
+    border-right: 0.063rem solid #d8d9db;
+
+    > .list-area > .all-list {
+      border: 0.0625rem solid #ebebeb;
+    }
+
+    .list-area .btn-tab {
+      width: 7.188rem;
+    }
+  }
+
+  .tit {
+    overflow: hidden;
+    display: block;
+    width: 100%;
+    height: 2.375rem;
+    margin: 0;
+    padding: 0;
+    color: #222222;
+    font-size: 1.2rem;
+    line-height: 2.375rem;
+  }
+
+  .list-area {
+    position: relative;
+    width: 100%;
+    margin: 0;
+    padding: 1.875rem 0 0 0;
+
+    .all-list .btn-tab.on {
+      border-right: 0.063rem solid #555555;
+    }
+
+    .all-list .btn-tab {
+      border-right: 0;
+    }
+
+    .btn-tab.on {
+      border-color: #666666;
+      border-bottom: 0;
+    }
+
+    .btn-tab {
+      display: block;
+      position: absolute;
+      left: 0;
+      top: 0;
+      z-index: 2;
+      height: 1.875rem;
+      font-size: 0.9333rem;
+      color: #222222;
+      border: 0.063rem solid #d8d9db;
+      background-color: #ffffff;
+    }
+
+    .list .scroll ul li button {
+      display: block;
+      position: relative;
+      min-height: 1.75rem;
+      padding: 0.188rem 1rem 0.188rem 1rem;
+      text-align: left;
+      font-size: 0.8667rem;
+      letter-spacing: 0;
+
+      span.txt {
+        display: inline;
+      }
+
+      span {
+        margin: 0 0.125rem 0 0;
+        vertical-align: middle;
+      }
+    }
+  }
+
+  button {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    letter-spacing: -1px;
+    background-color: transparent;
+  }
+
+  .list {
+    display: block;
+    width: 100%;
+    height: 20rem;
+    margin-top: 0.625rem;
+
+    .scroll {
+      overflow: hidden;
+      display: block;
+      width: 100%;
+      height: 100%;
+    }
+  }
+
+  .view-area {
+    width: 100%;
+    padding: 0;
+
+    .choice-all {
+      overflow: hidden;
+      width: 100%;
+      height: 6.188rem;
+      margin: 0.625rem 0 0 0;
+      padding: 1.563rem 0 0 0;
+      font-size: 0.9333rem;
+      line-height: 1.3;
+      text-align: center;
+      border: 0.063rem solid #ebebeb;
+      background-color: #ffffff;
+
+      strong {
+        display: block;
+        padding: 0;
+        font-weight: 400;
+      }
+
+      span {
+        display: block;
+        padding: 0;
+      }
+
+    }
+
+    .choice-list {
+      overflow: hidden;
+      margin: 0.625rem 0 0 0;
+
+      .bg {
+        overflow: hidden;
+        float: left;
+        width: 3.938rem;
+        height: 5.625rem;
+        background: url("https://img.megabox.co.kr/static/pc/images/reserve/bg-empty-cell.png") no-repeat center;
+      }
+    }
+  }
+
+  .theater-choice {
+    float: left;
+    width: 21.875rem;
+    height: 33.125rem;
+    padding: 0 1.25rem 1.25rem 1.25rem;
+    border-right: 0.063rem solid #d8d9db;
+
+    .list-area {
+      position: relative;
+
+      .btn-tab.on {
+        width: 9.688rem;
+      }
+    }
+
+    .scroll ul {
+      position: relative;
+      height: 100%;
+
+      li .btn {
+        overflow: visible;
+        position: relative;
+        width: 50%;
+        padding-left: 0.625rem;
+        padding-right: 0.625rem;
+      }
+
+      li .depth {
+        display: none;
+        position: absolute;
+        left: 50%;
+        top: 0;
+        width: 50%;
+        height: 20rem;
+        padding: 0;
+
+        .detail-list {
+          width: 100%;
+          height: 100%;
+          margin: 0;
+
+          ul li button {
+            padding-left: 0.75rem;
+            padding-right: 0;
+          }
+        }
+      }
+    }
+
+    .view-area .choice-list .bg {
+      overflow: visible;
+      display: inline-block;
+      vertical-align: middle;
+      width: 9.375rem;
+      height: 1.625rem;
+      margin: 0 0.125rem 0.375rem 0;
+      background: url("https://img.megabox.co.kr/static/pc/images/common/btn/btn-image-add.png") no-repeat center;
+      border: 0.063rem solid #ebebeb;
+      border-radius: 0.875rem;
+    }
+  }
+
+  .tit-area {
+    overflow: hidden;
+    height: 2.375rem;
+
+    .tit {
+      float: left;
+      width: auto;
+    }
+  }
+
+  .tit {
+    overflow: hidden;
+    display: block;
+    height: 2.375rem;
+    margin: 0;
+    padding: 0;
+    color: #222222;
+    font-size: 1.2rem;
+    line-height: 2.375rem;
+  }
+
+  .time-choice {
+    float: left;
+    width: calc(100% - 38.75rem);
+    height: 33.125rem;
+    padding: 0;
+
+    .tit {
+      padding-left: 1.25rem;
+    }
+
+    .tit-area .legend {
+      font-size: 0.8rem;
+      font-weight: 400;
+
+      .iconset {
+        margin-left: 0.313rem;
+      }
+    }
+
+    .tit-area .right {
+      float: right;
+      padding: 0.625rem 1.25rem 0 0;
+    }
+  }
+
+  .movie-schedule-area {
+    overflow: hidden;
+    margin-top: 0.625rem;
+    height: 26.875rem;
+    background-color: #ffffff;
+
+    .no-result {
+      height: 100%;
+      padding: 9.375rem 0 0 0;
+      text-align: center;
+
+      i {
+        display: block;
+        margin: 0 auto;
+      }
+
+      .txt {
+        margin-top: 0.625rem;
+      }
+    }
+
+    .result {
+      height: 100%;
+      padding: 0;
+      text-align: center;
+
+      .scroll {
+        height: 100%;
+
+        li {
+          border-top: 0.063rem solid #ebebeb;
+          list-style: none;
+
+          .btn {
+            overflow: hidden;
+            display: table;
+            table-layout: fixed;
+            width: 100%;
+            padding: 0;
+
+            div {
+              display: table-cell;
+              width: 1.875rem;
+              height: 4.125rem;
+              padding: 0.625rem 0 0 0;
+              vertical-align: top;
+            }
+
+            .time {
+              display: table-cell;
+              width: 3.75rem;
+              padding: 0.625rem 0;
+              text-align: left;
+              vertical-align: top;
+              font-weight: 300;
+
+              strong {
+                display: block;
+                font-size: 1.2rem;
+                font-weight: 700;
+              }
+
+              em {
+                display: block;
+                padding: 0.188rem 0 0 0;
+                font-size: 0.8667rem;
+                font-weight: 300;
+              }
+            }
+
+            .title {
+              display: table-cell;
+              width: 17.188rem;
+              padding: 0.625rem 0;
+              text-align: left;
+
+              strong {
+                display: block;
+                font-weight: 400;
+                padding: 0 0.313rem 0 0;
+                line-height: 1.3;
+              }
+
+              em {
+                display: block;
+                padding-top: 0.438rem;
+                font-size: 0.8rem;
+              }
+            }
+
+            .info {
+              display: table-cell;
+              width: 6.875rem;
+              padding: 0 0.313rem 0 0;
+              font-size: 0.8rem;
+              vertical-align: middle;
+              text-align: right;
+
+              .theater {
+                overflow: hidden;
+                display: block;
+                padding: 0;
+                line-height: 1.5;
+              }
+
+              .theab {
+                overflow: hidden;
+                display: block;
+                padding: 0;
+                line-height: 1.5;
+              }
+
+              .seat {
+                overflow: hidden;
+                display: inline-block;
+                width: 3.75rem;
+                height: 1.25rem;
+                padding: 0;
+                letter-spacing: 0;
+                text-align: center;
+                border: 0.063rem solid #f2f4f5;
+
+                .now {
+                  display: inline-block;
+                  color: #01738b;
+                  line-height: 1.25rem;
+                  vertical-align: middle;
+                }
+
+                span {
+                  display: inline-block;
+                  margin-top: 0.25rem;
+                  padding: 0;
+                  font-size: 0.6rem;
+                  color: #666666;
+                  line-height: 1.1;
+                  vertical-align: top;
+                }
+
+                .all {
+                  display: inline-block;
+                  color: #666666;
+                  line-height: 1.25rem;
+                  vertical-align: middle;
+                }
+              }
+            }
+          }
+        }
+
+        li:first-child {
+          border-top: 0;
+        }
+      }
+    }
+  }
+
+  p {
+    margin: 0;
+    padding: 0;
+  }
+}
+
+
+.quick-reserve-area:before, .quick-reserve-area:after {
+  content: '';
+  display: block;
+}
+
+.customScrollBox {
+  position: relative;
+  overflow-y: auto;
+  height: 100%;
+  max-width: 100%;
+  outline: 0;
+  direction: ltr;
+
+  .mCSB_container {
+    margin-right: 0.313rem;
+  }
+}
+
+.mCSB_container {
+  overflow: hidden;
+  width: auto;
+  height: auto;
+}
+
+.mCSB_scrollTools {
+  width: 0.313rem;
+  opacity: 1;
+  position: absolute;
+  height: auto;
+  left: auto;
+  top: 0;
+  right: 0;
+  bottom: 0;
+
+  .mCSB_draggerContainer {
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    height: auto;
+  }
+
+  .mCSB_dragger {
+    cursor: pointer;
+    width: 100%;
+    z-index: 1;
+
+    .mCSB_dragger_bar {
+      width: 0.313rem;
+      border-radius: 0.125rem;
+      //background-color: #555555;
+      position: relative;
+      height: 100%;
+      margin: 0 auto;
+      text-align: center;
+    }
+  }
+
+  .mCSB_draggerRail {
+    background-color: #ebebeb;
+    width: 0.313rem;
+    border-radius: 0.125rem;
+    height: 100%;
+    margin: 0 auto;
+  }
+}
+
+.mCustomScrollBox {
+  position: relative;
+  overflow-y: auto;
+  height: 100%;
+  max-width: 100%;
+  outline: 0;
+  direction: ltr;
+}
+
+.m-scroll .mCSB_inside > .mCSB_container {
+  margin-right: 0.313rem;
+}
+
+.ico-sun {
+  width: 0.875rem;
+  height: 0.875rem;
+  background-image: url("https://img.megabox.co.kr/static/pc/images/common/ico/ico-greeting-option-sun.png");
+}
+
+.ico-brunch {
+  width: 0.875rem;
+  height: 0.875rem;
+  background-image: url("https://img.megabox.co.kr/static/pc/images/common/ico/ico-time-brunch.png");
+}
+
+.ico-moon {
+  width: 0.875rem;
+  height: 0.875rem;
+  background-image: url("https://img.megabox.co.kr/static/pc/images/common/ico/ico-greeting-option-moon.png");
+}
+
+.hour-schedule {
+  overflow: hidden;
+  position: relative;
+  width: 100%;
+  height: 1.875rem;
+  padding: 0;
+
+  .btn-prev-time {
+    overflow: hidden;
+    display: block;
+    position: absolute;
+    left: 1.25rem;
+    top: 0.063rem;
+    width: 2.75rem;
+    height: 1.75rem;
+    text-indent: -9999px;
+    background: url("https://img.megabox.co.kr/static/pc/images/common/btn/btn-prev-time.png") no-repeat center;
+  }
+
+  .wrap {
+    overflow: hidden;
+    position: relative;
+    z-index: 2;
+    width: 21.875rem;
+    height: 1.875rem;
+    margin: 0 auto;
+    background-color: transparent;
+
+    .view {
+      height: 1.875rem;
+
+      .hour {
+        display: block;
+        float: left;
+        width: 2.188rem;
+        height: 1.875rem;
+        color: #444444;
+        font-size: 1.1333rem;
+        font-weight: 400 !important;
+        transition: background-color 0.3s ease;
+        cursor: pointer;
+      }
+
+      .hour.on {
+        background-color: #555555;
+        color: #ffffff;
+      }
+
+      .hour.inactive {
+        background-color: #555555;
+        color: #ffffff;
+      }
+
+    }
+  }
+
+  .btn-next-time {
+    overflow: hidden;
+    display: block;
+    position: absolute;
+    right: 1.25rem;
+    top: 0.063rem;
+    width: 2.75rem;
+    height: 1.75rem;
+    text-indent: -9999px;
+    background: url("https://img.megabox.co.kr/static/pc/images/common/btn/btn-next-time.png") no-repeat center;
+  }
+
+}
+
+.hour-schedule:before {
+  content: '';
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 0.063rem;
+  background-color: #f2f4f5;
+}
+
+.hour-schedule:after {
+  content: '';
+  display: block;
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  width: 100%;
+  height: 0.063rem;
+  background-color: #f2f4f5;
+}
+
+.hour-schedule .wrap .view:after, .hour-schedule .wrap .view:before {
+  content: '';
+  display: table;
+}
+
+.ico-movie-time {
+  width: 2.875rem;
+  height: 2.875rem;
+  background-image: url("https://img.megabox.co.kr/static/pc/images/common/ico/ico-movie-time.png");
+}
+
+.m-scroll .mCSB_scrollTools {
+  width: 0.313rem;
+  opacity: 1;
+}
+
+.btn.on {
+  background-color: #888888;
+  color: #ffffff;
+  border: 0.063rem solid #888888;
+}
+
+.btn.active {
+  background-color: #888888;
+  color: #ffffff;
+  border: 0.063rem solid #888888;
+}
+
+
+.seat-wrapper {
+  display: grid;
+  grid-template-columns: repeat(6, 50px); /* 3열 */
+  grid-template-rows: repeat(6, 50px); /* 3행 */
+  gap: 5px;
+  justify-content: center;
+  align-items: center;
+
+  .seat {
+    width: 50px;
+    height: 50px;
+    background-color: #999999;
+    border: none;
+    cursor: pointer;
+    text-align: center;
+    font-size: 14px;
+  }
+
+  .seat.clicked {
+    background-color: #503396;
+    color: #ffffff;
+  }
+
+  .seat:disabled {
+    background-color: #999999;
+    cursor: not-allowed;
+  }
+}
+
+.quick-reserve-include {
+  display: none;
+  opacity: 0;
+  transition-duration: 250ms;
+  transition-property: opacity;
+  transition-timing-function: ease;
+
+  &.-visible {
+    display: block;
+    opacity: 1;
+  }
+}
+
+.seat-container {
+  display: none;
+  opacity: 0;
+  transition-duration: 250ms;
+  transition-property: opacity;
+  transition-timing-function: ease;
+
+  &.-visible {
+    display: block;
+    opacity: 1;
+  }
+
+  > .big-div2 {
+    text-align: center;
+    margin-bottom: 1rem;
+
+    > h2 {
+      margin: 1rem 0;
+    }
+
+    > button {
+      margin: 2rem 0;
+    }
+  }
+}
+
+.payment-container {
+  display: none;
+  opacity: 0;
+  transition-duration: 250ms;
+  transition-property: opacity;
+  transition-timing-function: ease;
+
+  &.-visible {
+    display: block;
+    opacity: 1;
+  }
+
+  > .big-div3 {
+    text-align: center;
+    margin-bottom: 2rem;
+
+    > h2 {
+      margin: 1rem 0;
+    }
+
+    > .box {
+      width: 30rem;
+      margin: 1rem auto;
+      padding: 1rem;
+      box-shadow: 0 0 0.125rem 0.0625rem #50339680;
+      text-align: left;
+    }
+  }
+}
+
+.payment-form {
+  background-color: #ffffff;
+  border: 0.0625rem solid #ebebeb;
+  display: none;
+  width: 30rem;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  box-sizing: border-box;
+  z-index: 9;
+
+  > .title {
+    background-color: #503396;
+    padding: 0.5rem;
+
+    > h2 {
+      color: #ffffff;
+    }
+  }
+
+  > div {
+    box-sizing: border-box;
+    padding: 0.5rem;
+
+    > table {
+      > tbody {
+        > tr {
+          display: grid;
+          grid-template-columns: 1fr 3fr;
+
+          > td {
+            > label {
+              display: flex;
+              flex-direction: row;
+              justify-content: center;
+
+              > .charge {
+                user-select: none;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+
+  &.-visible {
+    display: block;
+  }
+}
+
+.booking-container {
+  display: none;
+
+  &.-visible {
+    display: block;
+  }
+
+  > h3 {
+    font-size: 1.5rem;
+    font-weight: 400;
+    margin: 2rem auto;
+    text-align: center;
+  }
+
+  > form {
+    text-align: center;
+
+    > button {
+      margin: 2rem auto;
+    }
+  }
+}
+

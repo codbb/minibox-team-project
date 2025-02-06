@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="dev.mini.minibox.mappers.ReviewMapper">
+    <insert id="insertReview" parameterType="dev.mini.minibox.entities.ReviewEntity">
+        INSERT INTO `mega`.`review` (`movieCd`, `nickname`, `rating`, `keyword`, `content`, `like`,
+                                     `created_at`)
+        VALUES (#{movieCd}, #{nickname}, #{rating}, #{keyword}, #{content}, #{like}, #{createdAt})
+    </insert>
+    <select id="selectAllReview" resultType="dev.mini.minibox.entities.ReviewEntity">
+        SELECT `index`      AS `index`,
+               `movieCd`    AS `movieCd`,
+               `nickname`   AS `nickname`,
+               `rating`     AS `rating`,
+               `keyword`    AS `keyword`,
+               `content`    AS `content`,
+               `like`       AS `like`,
+               `created_at` AS `createdAt`
+        FROM `mega`.`review`
+    </select>
+    <select id="selectReviewByIndex" resultType="dev.mini.minibox.entities.ReviewEntity">
+        SELECT `index`      AS `index`,
+               `movieCd`    AS `movieCd`,
+               `nickname`   AS `nickname`,
+               `rating`     AS `rating`,
+               `keyword`    AS `keyword`,
+               `content`    AS `content`,
+               `like`       AS `like`,
+               `created_at` AS `createdAt`
+        FROM `mega`.`review`
+        WHERE `index` = #{index}
+        LIMIT 1
+    </select>
+    <select id="selectReviewByMovieCd" resultType="dev.mini.minibox.entities.ReviewEntity">
+        SELECT `index`      AS `index`,
+               `movieCd`    AS `movieCd`,
+               `nickname`   AS `nickname`,
+               `rating`     AS `rating`,
+               `keyword`    AS `keyword`,
+               `content`    AS `content`,
+               `like`       AS `like`,
+               `created_at` AS `createdAt`
+        FROM `mega`.`review`
+        WHERE `movieCd` = #{movieCd}
+        ORDER BY `created_at` DESC
+    </select>
+    <select id="reviewCountByMovieCd" resultType="int">
+        SELECT COUNT(*)
+        FROM `mega`.`review`
+        WHERE `movieCd` = #{movieCd}
+    </select>
+    <select id="selectRatingsByMovieCd" resultType="java.lang.Integer">
+        SELECT `rating` AS `rating`
+        FROM `mega`.`review`
+        WHERE `movieCd` = #{movieCd}
+    </select>
+
+    <select id="selectReviewsByUserEmail" resultType="dev.mini.minibox.vos.ReviewVo">
+        SELECT `index`               AS `index`,
+               `review`.`movieCd`    AS `movieCd`,
+               `review`.`nickname`   AS `nickname`,
+               `rating`              AS `rating`,
+               `keyword`             AS `keyword`,
+               `review`.`content`    AS `content`,
+               `like`                AS `like`,
+               `review`.`created_at` AS `createdAt`,
+               `movies`.`movieCd`    AS `movieCd`,
+               `movieNm`             AS `movieNm`,
+               `movieNmEn`           AS `movieNmEn`,
+               `poster`              AS `poster`,
+               `email`               AS `email`,
+               `users`.`nickname`    AS `nickname`
+        FROM `mega`.`review`
+                 JOIN `mega`.`movies` ON `movies`.`movieCd` = `review`.`movieCd`
+                 JOIN `mega`.`users` ON `users`.`nickname` = `review`.`nickname`
+        WHERE `users`.`email` = #{userEmail}
+        ORDER BY `index` DESC
+    </select>
+
+    <select id="existsReviewByIndex" parameterType="int" resultType="boolean">
+        SELECT EXISTS (
+            SELECT 1
+            FROM `mega`.`review`
+            WHERE `index` = #{index}
+        )
+    </select>
+
+    <delete id="deleteReviewByIndex" parameterType="int">
+        DELETE FROM `mega`.`review`
+        WHERE `index` = #{index}
+    </delete>
+</mapper>

@@ -1,0 +1,162 @@
+<!doctype html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>MEET PLAY SHARE, 미니박스</title>
+<!--    메인 화면에서 극장을 선택하면 나오는 페이지-->
+    <link rel="shortcut icon" th:href="@{'/assets/images/Mainfavicon.ico'}">
+<!--    <link rel="shortcut icon" href="/static/assets/images/Mainfavicon.ico">-->
+    <link rel="stylesheet" th:href="@{'/assets/styles/theater.css'}">
+<!--    <link rel="stylesheet" href="../../static/assets/styles/theater.css">-->
+    <link rel="stylesheet" th:href="@{'/assets/styles/common.css'}" type="text/css">
+    <script defer th:src="@{'/assets/scripts/common.js'}" type="text/javascript"></script>
+    <script defer th:src="@{'/assets/scripts/theater.js'}" type="text/javascript"></script>
+</head>
+<body>
+<th:block th:replace="~{fragments/common-header-white.html :: commonCover}"></th:block>
+<th:block th:replace="~{fragments/common-header-white.html :: commonHeaderWhite}"></th:block>
+<th:block th:replace="~{fragments/common-header-white.html :: commonLogin}"></th:block>
+<form class="container" id="mainForm">
+    <div class="page-util">
+        <div class="inner-wrap">
+            <div class="location">
+                <img th:src="@{/assets/images/bg-location-home.png}" alt="">
+                <a href="/theater/list" title="극장 페이지로 이동">
+                    극장
+                </a>
+                <a href="/theater/list" title="전체극장 페이지로 이동">
+                    전체극장
+                </a>
+            </div>
+        </div>
+    </div>
+    <div id="contents" class="no-padding">
+        <div class="inner-wrap">
+            <h2 class="tit mt40">전체극장</h2>
+            <div class="theater-box" style="height: 24.375rem">
+                <div class="theater-place">
+                    <ul>
+                        <li class="on" th:each="area : ${areas}">
+                            <button name="selCity" class="sel-city" type="button" th:text="${area.getName()}"></button>
+                            <div class="theater-list">
+                                <ul>
+                                    <li data-brch-no="1372" class="Name" th:each="theater : ${theaters}">
+                                        <a class="theaterName" th:title="${theater.getName()}" th:if="${theater.getAreaCode().equals(area.getCode())}" th:text="${theater.getName()}" th:href="@{'/theater/detail' (brchNo=${theater.getBrchNo()})}">
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+                <div class="user-theater">
+                    <!--                                로그인 전-->
+                    <div>
+                        <img class="iconset ico-favo-theater" th:src="@{/assets/images/ico-favo-theater.png}" alt="">
+                        나의 선호극장 정보
+                        <button th:if="${session.user == null}" class="button small ml10" id="moveLogin" title="로그인하기" type="button">로그인하기</button>
+                        <button th:if="${session.user != null}" class="button small ml10" id="moveLogout" type="button">선호 극장</button>
+
+                    </div>
+                </div>
+            </div>
+            <div class="tit-util mt70 mb15">
+                <h3 class="tit">극장 이벤트</h3>
+                <a href="/event/theater" class="more" title="극장 이벤트 더보기">
+                    더보기
+                    <i class="iconset ico-arr-right-gray"></i>
+                </a>
+            </div>
+            <div class="event-box">
+                <ul>
+                    <li>
+                        <a href="#" class="eventBtn" data-no="16683" data-netfunnel="N" title="[포항] 오픈 2주년 이벤트 상세보기">
+                            <img th:src="@{'/assets/images/1nWmOJDowyxVZI2yCKVla27O7ijgTYV4.jpg'}" alt="[포항] 오픈 2주년 이벤트 상세보기" onerror="noImg(this)">
+                        </a>
+                    </li>
+                    <li><a href="#" class="eventBtn" data-no="16684" data-netfunnel="N" title="[덕천] 문화누리 관람권 패키지! 상세보기">
+                        <img th:src="@{'/assets/images/wREstDtBwBBkMEMOyWqYjq4IoF9JtRXz.jpg'}" alt="[덕천] 문화누리 관람권 패키지! 상세보기" onerror="noImg(this)">
+                    </a></li>
+                </ul>
+            </div>
+            <div class="tit-util mt70 mb15">
+                <h3 class="tit">극장 공지사항</h3>
+                <span class="-spring"></span>
+                <a href="/support/notice?ti=3" class="more" title="극장 공지사항 더보기">
+                    더보기
+                    <i class="iconset ico-arr-right-gray"></i>
+                </a>
+            </div>
+            <div class="table-wrap">
+                <table class="board-list">
+                    <caption>극장, 제목, 지역, 등록일이 들어간 극장 공지사항 목록</caption>
+                    <colgroup>
+                        <col style="width: 9.375rem">
+                        <col style="width: 9.375rem">
+                        <col style="width: 7.5rem">
+                    </colgroup>
+                    <thead>
+                    <tr>
+                        <th scope="col">극장</th>
+                        <th scope="col">제목</th>
+                        <th scope="col">지역</th>
+                        <th scope="col">등록일</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td>킨덱스</td>
+                        <th scope="row">
+                            <a href="#" title="[킨텐스]주차요금 변경 안내 상세보기">[킨텐스]주차요금 변경 안내</a>
+                        </th>
+                        <td>경기</td>
+                        <td>2024.11.27</td>
+                    </tr>
+                    <tr>
+                        <td>킨덱스</td>
+                        <th scope="row">
+                            <a href="#" title="[킨텐스]주차요금 변경 안내 상세보기">[킨텐스]주차요금 변경 안내</a>
+                        </th>
+                        <td>경기</td>
+                        <td>2024.11.27</td>
+                    </tr>
+                    <tr>
+                        <td>킨덱스</td>
+                        <th scope="row">
+                            <a href="#" title="[킨텐스]주차요금 변경 안내 상세보기">[킨텐스]주차요금 변경 안내</a>
+                        </th>
+                        <td>경기</td>
+                        <td>2024.11.27</td>
+                    </tr>
+                    <tr>
+                        <td>킨덱스</td>
+                        <th scope="row">
+                            <a href="#" title="[킨텐스]주차요금 변경 안내 상세보기">[킨텐스]주차요금 변경 안내</a>
+                        </th>
+                        <td>경기</td>
+                        <td>2024.11.27</td>
+                    </tr>
+                    <tr>
+                        <td>킨덱스</td>
+                        <th scope="row">
+                            <a href="#" title="[킨텐스]주차요금 변경 안내 상세보기">[킨텐스]주차요금 변경 안내</a>
+                        </th>
+                        <td>경기</td>
+                        <td>2024.11.27</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+            ::after
+        </div>
+    </div>
+</form>
+<section id="saw_movie_reqi" class="modal-layer">
+
+</section>
+<th:block th:replace="~{fragments/common-footer.html :: commonFooter}"></th:block>
+</body>
+</html>

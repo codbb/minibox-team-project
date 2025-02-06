@@ -1,0 +1,673 @@
+@charset "UTF-8";
+* {
+  box-sizing: border-box;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  overflow: auto;
+  overflow-y: scroll;
+  letter-spacing: 0;
+  line-height: 1.5;
+  font-size: 13px;
+  color: #444;
+  font-weight: 400;
+  font-family: NanumBarunGothic, Dotum, "돋움", sans-serif;
+}
+
+#header {
+  position: relative;
+  z-index: 100;
+  width: 100%;
+  min-width: 1100px;
+  height: 91px;
+  background: #fff;
+  border-bottom: 1px solid #351f67;
+}
+
+.container {
+  width: 100%;
+  min-width: 1100px;
+  min-height: 100%;
+  margin: -92px 0 -200px 0;
+  padding: 92px 0 300px 0;
+}
+
+.page-util {
+  display: block;
+  position: static;
+  width: 100%;
+  height: 42px;
+  background-color: #f8f8fa;
+}
+
+#contents {
+  width: 100%;
+  margin: 0;
+  padding: 40px 0 0 0;
+}
+#contents > .inner-wrap {
+  width: 1100px;
+  margin: 0 auto;
+}
+
+h2.tit {
+  padding: 0 0 26px 0;
+  font-size: 1.8666em;
+  font-weight: 400;
+  letter-spacing: -1px;
+  line-height: 1.1;
+  color: #222;
+}
+
+.tab-list {
+  position: static;
+  width: 100%;
+  background-color: rgb(255, 255, 255);
+}
+.tab-list > ul {
+  position: relative;
+  width: 100%;
+  height: 42px;
+}
+.tab-list > ul > li {
+  float: left;
+  height: 42px;
+  margin: 0;
+  border-top: 1px solid #ebebeb;
+  border-left: 1px solid #ebebeb;
+  border-bottom: 1px solid #503396;
+}
+.tab-list > ul > li:first-child:nth-last-child(5), .tab-list > ul > li:first-child:nth-last-child(5) ~ li {
+  width: 20%;
+}
+.tab-list > ul > li > a {
+  position: relative;
+  display: block;
+  width: 100%;
+  height: 41px;
+  line-height: 40px;
+  padding: 0;
+  text-align: center;
+  color: #222;
+  font-size: 1.0667em;
+  text-decoration: none;
+}
+.tab-list > ul > li.on {
+  border: 1px solid #503396;
+  border-bottom: 0;
+}
+.tab-list > ul > li.on > a {
+  z-index: 3;
+  color: #503396;
+  background-color: #fff;
+}
+.tab-list > ul > li.on > a:active, .tab-list > ul > li.on > a:focus, .tab-list > ul > li.on > a:hover, .tab-list > ul > li.on > a:visited {
+  color: #503396;
+  text-decoration: none;
+}
+.tab-list > ul > li.on + li {
+  border-left: 0;
+}
+
+#movieList {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+}
+
+.movie-list-result, .movie-list-util-result {
+  display: none;
+}
+
+.movie-list-util {
+  overflow: hidden;
+  margin-bottom: 15px;
+}
+
+.movie-list-util .movie-sorting {
+  float: left;
+  padding: 10px 0 0 0;
+}
+
+.movie-list-util .onair-condition {
+  float: left;
+  margin-left: 10px;
+  padding: 10px 0 0 0;
+}
+
+.movie-list-util .onair-condition .btn-onair {
+  display: block;
+  padding: 0 0 0 30px;
+  background: #fff no-repeat 0 2px;
+}
+
+.movie-list-util .onair-condition .btn-onair.on {
+  background-position: 0 -17px;
+}
+
+.movie-list-util .movie-sorting {
+  float: left;
+  margin-left: 10px;
+  padding: 10px 0 0 0;
+}
+.movie-list-util .movie-sorting.ml30 {
+  margin-left: 30px;
+}
+
+.movie-list-util .movie-sorting span {
+  display: block;
+  position: relative;
+  float: left;
+  margin: 0 10px;
+}
+
+.movie-list-util .movie-sorting span:first-child {
+  margin-left: 0;
+}
+
+.movie-list-util .movie-sorting span .btn {
+  display: block;
+  color: #666;
+}
+
+.movie-list-util .movie-sorting span .btn.on {
+  color: #222;
+  font-weight: 700;
+}
+
+.movie-list-util .movie-sorting span:nth-child(2):before {
+  content: "";
+  position: absolute;
+  left: -10px;
+  top: 50%;
+  display: block;
+  width: 1px;
+  height: 12px;
+  margin: -6px 0 0 0;
+  background-color: #d8d9db;
+}
+
+.movie-list-util button {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  background-color: transparent;
+}
+
+.movie-list-util .no-result-count {
+  float: left;
+  margin: 0 0 0 20px;
+  padding: 1px 0 0 0;
+  color: #222;
+  line-height: 34px;
+}
+
+.movie-list-util .movie-search {
+  position: relative;
+  float: right;
+  width: 230px;
+  height: 36px;
+  margin: 0;
+  padding: 0 31px 0 0;
+  border: 1px solid #d8d9db;
+  border-radius: 3px;
+}
+
+.movie-list-util .movie-search .input-text {
+  display: block;
+  width: 100%;
+  height: 34px;
+  border: 0;
+}
+
+.movie-list-util .movie-search .btn-search-input {
+  position: absolute;
+  right: 1px;
+  top: 1px;
+  background: no-repeat center;
+}
+
+.movie-list {
+  letter-spacing: 0;
+}
+
+.movie-list ol {
+  margin-left: -60px;
+}
+
+.movie-list ol li {
+  overflow: hidden;
+  position: relative;
+  float: left;
+  width: 230px;
+  height: 450px;
+  margin: 0 0 0 60px;
+  padding: 0;
+  background-color: #fff;
+}
+
+.movie-list ol li:nth-child(4n) ~ li {
+  margin-top: 60px;
+}
+
+.movie-list ol li .movie-list-info {
+  overflow: hidden;
+  display: block;
+  position: relative;
+  width: 230px;
+  height: 331px;
+  text-decoration: none;
+  background-color: #f5f5f5;
+  border-radius: 8px;
+}
+
+.movie-list ol li.no-img .movie-list-info a .rank {
+  background-image: none;
+}
+
+.movie-list ol li .movie-list-info a .rank {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 230px;
+  height: 150px;
+  padding: 8px 0 0 10px;
+  line-height: 1.1;
+  font-size: 2em;
+  font-style: italic;
+  font-family: Roboto, Dotum, "돋움", sans-serif;
+  font-weight: 300;
+  color: #fff;
+  text-shadow: 2px 2px 2px rgba(0, 0, 0, 0.8);
+}
+
+.movie-list p {
+  margin: 0;
+  padding: 0;
+}
+
+.movie-list ol li .tit-area {
+  position: relative;
+  width: 100%;
+  margin: 15px 0 0 0;
+  padding: 0 0 0 30px;
+  line-height: 25px;
+}
+
+.movie-list ol li .rate-date {
+  overflow: hidden;
+  padding: 10px 0 0 0;
+}
+
+.movie-list ol li .rate-date span {
+  display: block;
+  position: relative;
+  float: left;
+}
+
+.movie-list ol li .rate-date span.rate:after {
+  content: "";
+  display: block;
+  position: absolute;
+  right: 0;
+  top: 50%;
+  width: 1px;
+  height: 12px;
+  margin: -6px 0 0 0;
+  background-color: #d8d9db;
+}
+
+.movie-list ol li .btn-util {
+  overflow: hidden;
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  height: 36px;
+}
+
+.ir {
+  text-indent: -9999px;
+  position: fixed;
+  top: -9999px;
+  font-size: 1px;
+  width: 1px;
+  height: 1px;
+  opacity: 0;
+}
+
+.movie-list ol li .movie-list-info img.poster {
+  width: 230px;
+  height: 331px;
+}
+
+.movie-list ol li .movie-list-info .screen-type2 {
+  position: absolute;
+  left: 8px;
+  bottom: 8px;
+}
+
+.movie-list ol li .movie-list-info .screen-type2 p {
+  display: block;
+  margin: 0;
+}
+
+.movie-list ol li .movie-list-info .screen-type2 p + p {
+  margin-top: 2px;
+}
+
+.movie-list ol li .movie-list-info .screen-type2 img {
+  display: block;
+  width: 60px;
+  height: 20px;
+}
+
+.movie-list ol li .movie-list-info .movie-score {
+  position: absolute;
+  left: 0;
+  top: 0;
+  z-index: -1;
+  width: 230px;
+  height: 331px;
+  color: #fff;
+  opacity: 0;
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.movie-list ol li .movie-list-info .movie-score.on {
+  top: 0;
+  z-index: 10;
+  transform: translateY(0);
+}
+
+.movie-list ol li .movie-list-info .movie-score .wrap {
+  position: relative;
+  display: block;
+  width: 100%;
+  height: 100%;
+  padding: 20px;
+  color: #fff;
+  background-color: rgba(0, 0, 0, 0.8);
+}
+
+.movie-list ol li .movie-list-info .movie-score .wrap .summary {
+  overflow: hidden;
+  height: 152px;
+}
+
+.movie-list ol li .movie-list-info .movie-score .my-score {
+  overflow: hidden;
+  width: 100%;
+  margin-top: 110px;
+  padding: 5px 0 0 0;
+  border-top: 1px solid #3c3c3c;
+  text-align: center;
+}
+
+.movie-list ol li .movie-list-info .movie-score .my-score .preview {
+  display: inline-block;
+  vertical-align: middle;
+  line-height: 36px;
+}
+
+.movie-list ol li .movie-list-info .movie-score .my-score .preview .tit {
+  display: block;
+  float: left;
+  margin: 0 15px 0 0;
+  font-size: 0.8667em;
+}
+
+.movie-list ol li .movie-list-info .movie-score .my-score .preview .number {
+  float: left;
+  font-size: 1.6em;
+  color: #59bec9;
+}
+
+.movie-list ol li .tit-area .movie-grade {
+  position: absolute;
+  left: 0;
+  top: 50%;
+  margin-top: -10px;
+}
+
+.movie-grade.age-12, .movie-grade.age-15, .movie-grade.age-19, .movie-grade.age-all, .movie-grade.age-none {
+  background-size: 23px 23px;
+}
+
+.movie-grade {
+  overflow: hidden;
+  display: inline-block;
+  width: 23px;
+  height: 23px;
+  margin: 0;
+  padding: 0;
+  text-indent: -9999px;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.movie-list ol li .tit-area .tit {
+  overflow: hidden;
+  display: block;
+  width: 100%;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  padding: 2px 0 0 1px;
+  font-size: 1.3333em;
+  font-weight: 400;
+}
+
+.movie-list ol li .rate-date span.rate {
+  margin: 0 7px 0 0;
+  padding: 0 8px 0 0;
+}
+
+.movie-list ol li .btn-util .btn-like {
+  float: left;
+  width: 72px;
+  margin: 0;
+  padding: 0 5px;
+  font-size: 0.8667em;
+  border-color: #ebebeb;
+}
+
+.movie-list ol li .btn-util .txt {
+  display: block;
+  float: left;
+  width: 153px;
+  height: 36px;
+  margin: 0 0 0 5px;
+  padding: 0;
+  text-align: center;
+  line-height: 36px;
+  color: #fff;
+  border-radius: 4px;
+  background-color: #666;
+}
+
+.movie-list ol li .btn-util .case {
+  float: left;
+  width: 153px;
+  margin-left: 5px;
+}
+
+.movie-list ol li .btn-util .case .button {
+  display: block;
+  float: left;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+.movie-list ol li .btn-util .case.col-2 .button {
+  width: 74px;
+  margin-left: 5px;
+}
+
+.movie-list ol li .btn-util .case.col-2 .button:first-child {
+  margin-left: 0;
+}
+
+.movie-list ol li .btn-util .case.col-2 .button.img img {
+  display: inline-block;
+  padding-top: 7px;
+}
+
+.movie-list-no-result {
+  padding: 50px 0 0 0;
+  color: #222;
+  text-align: center;
+  font-size: 1.3333em;
+}
+
+ol, ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+a {
+  background-color: transparent;
+}
+a:visited {
+  color: #666;
+  text-decoration: none;
+  outline: 1px dotted #000;
+}
+
+.button {
+  display: inline-block;
+  height: 36px;
+  margin: 0;
+  padding: 0 15px;
+  text-align: center;
+  line-height: 34px;
+  color: #503396;
+  font-weight: 400;
+  border-radius: 4px;
+  font-family: NanumBarunGothic, Dotum, "돋움", sans-serif;
+  text-decoration: none;
+  border: 1px solid #503396;
+  vertical-align: middle;
+  background-color: #fff;
+  cursor: pointer;
+}
+.button > i {
+  margin-top: -2px;
+  margin-left: 4px;
+}
+.button > i:first-child {
+  margin-left: 0;
+  margin-right: 4px;
+}
+
+.button.purple {
+  color: #fff;
+  line-height: 36px;
+  border: 0;
+  background: #503396;
+}
+
+a.button {
+  text-decoration: none;
+}
+
+a.button:active, a.button:focus, a.button:hover, a.button:visited {
+  color: #503396;
+}
+
+a.button.purple:active, a.button.purple:focus, a.button.purple:hover, a.button.purple:visited {
+  color: #fff;
+}
+
+b, strong {
+  font-weight: 700;
+}
+
+img {
+  border: 0;
+}
+
+[type=button], [type=reset], [type=submit], button {
+  -webkit-appearance: button;
+}
+
+button {
+  cursor: pointer;
+  letter-spacing: -0.5px;
+  font-weight: 400;
+  font-family: NanumBarunGothic, Dotum, "돋움", sans-serif;
+}
+
+button, select {
+  text-transform: none;
+}
+
+button, input {
+  overflow: visible;
+}
+
+button, input, optgroup, select, textarea {
+  margin: 0;
+  font-family: inherit;
+  font-size: 1em;
+  line-height: 1.15;
+}
+
+.input-text {
+  display: inline-block;
+  width: 100%;
+  height: 32px;
+  padding: 0 10px;
+  line-height: 30px;
+  color: #444;
+  border: 1px solid #d8d9db;
+  vertical-align: middle;
+  font-family: NanumBarunGothic, Dotum, "돋움", sans-serif;
+}
+
+.btn-search-input {
+  overflow: hidden;
+  width: 30px;
+  height: 32px;
+  margin: 0;
+  padding: 0;
+  font-size: 0;
+  line-height: 0;
+  border: 0;
+  text-indent: -9999px;
+}
+
+.mt40 {
+  margin-top: 40px;
+}
+
+.mt40 {
+  margin-top: 40px !important;
+}
+
+.ico-heart-toggle-gray {
+  width: 17px;
+  height: 15px;
+}
+
+.ico-heart-toggle-gray.on {
+  background-position: -17px 0;
+}
+
+.iconset {
+  overflow: hidden;
+  display: inline-block;
+  margin: -1px 0 0 0;
+  padding: 0;
+  font-size: 0;
+  line-height: 0;
+  vertical-align: middle;
+  background-position: 0 0;
+  background-repeat: no-repeat;
+}
+
+/*# sourceMappingURL=movie.css.map */

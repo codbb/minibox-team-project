@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="dev.mini.minibox.mappers.MovieLikeMapper">
+    <insert id="insertMovieLike">
+        INSERT INTO `mega`.`movie_likes` (`movie_id`, `user_id`)
+        VALUES (#{movieId}, #{userId})
+        ON DUPLICATE KEY UPDATE id = LAST_INSERT_ID(id)
+    </insert>
+    <delete id="deleteMovieLike">
+        DELETE FROM `mega`.`movie_likes`
+        WHERE `movie_id` = #{movieId}
+        AND `user_id` = #{userId}
+    </delete>
+    <select id="movieLikeCountByMovieId" resultType="int">
+        SELECT COUNT(*)
+        FROM `mega`.`movie_likes`
+        WHERE `movie_id` = #{movieId}
+    </select>
+    <select id="selectMovieLikesByUserId" resultType="int">
+        SELECT `movie_id`
+        FROM `mega`.`movie_likes`
+        WHERE `user_id` = #{userId}
+    </select>
+
+    <select id="selectMovieLikesByUserEmail" resultType="dev.mini.minibox.vos.MovieLikeVo">
+        SELECT `movie_likes`.`id` AS `id`,
+               `movie_id`         AS `movieId`,
+               `user_id`          AS `userId`,
+               movies.`id`        AS `id`,
+               `movieCd`          AS `movieCd`,
+               `movieNm`          AS `movieNm`,
+               `directors`        AS `directors`,
+               `actors`           AS `actors`,
+               `genres`           AS `genres`,
+               `showTm`           AS `showTm`,
+               `watchGradeNm`     AS `watchGradeNm`,
+               `openDt`           AS `openDt`,
+               `prdtStatNm`       AS `prdtStatNm`,
+               `nationNm`         AS `nationNm`,
+               `poster`           AS `poster`,
+               `content`          AS `content`,
+               `email`            AS `email`,
+               `nickname`         AS `nickname`
+        FROM `mega`.`movie_likes`
+                 JOIN `mega`.`movies` ON `movies`.`id` = `movie_likes`.`movie_id`
+                 JOIN `mega`.`users` ON `users`.`nickname` = `movie_likes`.user_id
+        WHERE `users`.`email` = #{userEmail}
+        ORDER BY `movie_likes`.`id` DESC
+    </select>
+</mapper>

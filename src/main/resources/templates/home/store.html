@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>미니박스</title>
+    <link rel="shotcut icon" th:href="@{'/assets/images/favicon.ico'}">
+    <link rel="stylesheet" th:href="@{'/assets/styles/common.css'}" type="text/css">
+    <link rel="stylesheet" th:href="@{'/assets/styles/register-com.css'}" type="text/css">
+    <script th:src="@{'/assets/scripts/common.js'}" type="text/javascript"></script>
+</head>
+<body>
+
+<div class="member-wrap">
+    <h1>
+        <a th:href="@{'/'}"><img th:src="@{'/assets/images/logo_new1.png'}" alt=""></a>
+    </h1>
+
+    <h1>스토어 페이지</h1>
+    <div class="prepare">
+        <p>죄송합니다.</p>
+        <p>요청하신 페이지는 현재 준비중입니다.</p>
+        <img src="data:image/png;base64,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" alt="external-working-working-from-home-justicon-lineal-justicon">
+        <div>
+            <button class="--button -purple"><a th:href="@{'/'}">메인으로</a></button>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="dev.mini.minibox.mappers.TheaterDetailMapper">
+    <insert id="insertTheaterDetail"
+            useGeneratedKeys="true"
+            keyColumn="brch_no"
+            keyProperty="brch_no" parameterType="dev.mini.minibox.entities.TheaterDetailEntity">
+        INSERT INTO `mega`.`theaters_detail` (`brch_no`, `content`, `title`, `created_at`, `updated_at`, `deleted_at`)
+        VALUES (#{brchNo}, #{content}, #{title}, #{createdAt}, #{updatedAt}, #{deletedAt})
+    </insert>
+    <update id="update">
+        UPDATE `mega`.`theaters_detail`
+        SET `title` = #{title},
+            `content` = #{content}
+        WHERE brch_no = #{brchNo}
+    </update>
+    <select id="selectTheaterDetail"
+            resultType="dev.mini.minibox.entities.TheaterDetailEntity">
+        SELECT `brch_no`    AS `brchNo`,
+               `content`    AS `content`,
+               `created_at` AS `createdAt`,
+               `updated_at` AS `updatedAt`,
+               `deleted_at` AS `deletedAt`,
+               `title`      AS `title`
+        FROM `mega`.`theaters_detail`
+        WHERE `brch_no` = #{brchNo}
+
+    </select>
+    <select id="selectByDetailCode" resultType="dev.mini.minibox.entities.TheaterDetailEntity">
+        SELECT `brch_no`    AS `detailCode`,
+               `title`      AS `title`,
+               `content`    AS `content`,
+               `created_at` AS `createdAt`,
+               `updated_at` AS `updatedAt`,
+               `deleted_at` AS `deletedAt`
+        FROM `mega`.`theaters_detail`
+        WHERE `brch_no` = #{brchNo}
+    </select>
+    <select id="getAllTheaterDetails" resultType="dev.mini.minibox.entities.TheaterDetailEntity">
+        SELECT `brch_no` AS `brchNo`
+        FROM `mega`.`theaters_detail`
+    </select>
+
+
+    <insert id="insertDetail" parameterType="dev.mini.minibox.entities.TheaterDetailEntity">
+        INSERT INTO `mega`.`theaters_detail` (`brch_no`, `title`, `content`, `created_at`, `updated_at`, `deleted_at`)
+        VALUES (#{brchNo}, #{title}, #{content}, #{createdAt}, #{updatedAt}, #{deletedAt})
+    </insert>
+
+    <update id="updatedTheaterBrchDetail">
+        UPDATE `mega`.`theaters_detail`
+        SET `title` = #{title}, `content` = #{content}, `updated_at` = #{updatedAt}
+        WHERE `brch_no` = #{brchNo}
+    </update>
+</mapper>

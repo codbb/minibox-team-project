@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="dev.mini.minibox.mappers.BookingMapper">
+
+    <insert id="insertBooking" parameterType="dev.mini.minibox.entities.BookingEntity">
+        INSERT INTO `mega`.`bookings`
+            (`schedule_id`, `user_email`, `seat_id`, `payment_id`, `created_at`)
+        VALUES (#{scheduleId}, #{userEmail}, #{seatId}, #{paymentId}, #{createdAt});
+    </insert>
+
+    <select id="selectBookingsByEmail" resultType="dev.mini.minibox.vos.BookingVo">
+        SELECT `bookings`.`id`   AS `id`,
+               `schedule_id`     AS `scheduleId`,
+               `user_email`      AS `userEmail`,
+               `seat_id`         AS `seatId`,
+               `payment_id`      AS `paymentId`,
+               `created_at`      AS `createdAt`,
+               `area_cd`         AS `areaCd`,
+               `area_cd_nm`      AS `areaCdNm`,
+               `brch_no`         AS `brchNo`,
+               `brch_nm`         AS `brchNm`,
+               `theab_no`        AS `theabNo`,
+               `movie_nm`        AS `movieNm`,
+               `play_start_time` AS `playStartTime`,
+               `play_end_time`   AS `playEndTime`,
+               `play_de`         AS `playDe`,
+               `seat_no`         AS `seatNo`
+        FROM `mega`.`bookings`
+                 JOIN `mega`.`schedules` ON `schedules`.`id` = `bookings`.`schedule_id`
+                 JOIN `mega`.`seats` ON `seats`.`id` = `bookings`.`seat_id`
+        WHERE `user_email` = #{userEmail}
+        ORDER BY `created_at` DESC
+    </select>
+
+    <select id="selectSeatBooking" resultType="dev.mini.minibox.entities.BookingEntity">
+        SELECT *
+        FROM `mega`.`bookings`
+        WHERE `seat_id` = #{seatId} AND `schedule_id` = #{scheduleId};
+    </select>
+
+    <select id="selectBookingsByEmailPaymentId" resultType="dev.mini.minibox.vos.BookingVo">
+        SELECT `bookings`.`id`   AS `id`,
+               `schedule_id`     AS `scheduleId`,
+               `user_email`      AS `userEmail`,
+               `seat_id`         AS `seatId`,
+               `payment_id`      AS `paymentId`,
+               `created_at`      AS `createdAt`,
+               `area_cd`         AS `areaCd`,
+               `area_cd_nm`      AS `areaCdNm`,
+               `brch_no`         AS `brchNo`,
+               `brch_nm`         AS `brchNm`,
+               `theab_no`        AS `theabNo`,
+               `movie_nm`        AS `movieNm`,
+               `play_start_time` AS `playStartTime`,
+               `play_end_time`   AS `playEndTime`,
+               `play_de`         AS `playDe`,
+               `seat_no`         AS `seatNo`
+        FROM `mega`.`bookings`
+                 JOIN `mega`.`schedules` ON `schedules`.id = `bookings`.`schedule_id`
+                 JOIN `mega`.`seats` ON `seats`.`id` = `bookings`.`seat_id`
+        WHERE `user_email` = #{userEmail}
+          AND `payment_id` = #{paymentId}
+    </select>
+
+
+</mapper>

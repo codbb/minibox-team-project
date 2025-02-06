@@ -1,0 +1,146 @@
+<!doctype html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>극장 상세 페이지</title>
+<!--    극장 페이지에서 하위 지점을 선택하면 나오는 페이지-->
+    <link rel="shortcut icon" th:href="@{'/assets/images/Mainfavicon.ico'}">
+    <link rel="stylesheet" th:href="@{'/assets/styles/detail.css'}">
+    <link rel="stylesheet" href="/assets/libraries/ckeditor/ckeditor5.css" type="text/css">
+    <link rel="stylesheet" href="/assets/libraries/ckeditor/ckeditor5-content.css" type="text/css">
+    <link rel="stylesheet" href="/assets/libraries/ckeditor/ckeditor5-editor.css" type="text/css">
+    <link rel="stylesheet" th:href="@{'/assets/styles/common.css'}" type="text/css">
+    <script defer th:src="@{'/assets/scripts/common.js'}" type="text/javascript"></script>
+    <script th:src="@{'/assets/libraries/ckeditor/ckeditor5.umd.js'}" type="text/javascript"></script>
+    <script defer th:src="@{'/assets/scripts/detail.js'}" type="text/javascript"></script>
+</head>
+<body>
+<th:block th:replace="~{fragments/common-header-white.html :: commonCover}"></th:block>
+<th:block th:replace="~{fragments/common-header-white.html :: commonHeaderWhite}"></th:block>
+<th:block th:replace="~{fragments/common-header-white.html :: commonLogin}"></th:block>
+<main class="container">
+    <div class="page-util">
+        <div class="inner-wrap">
+            <div class="location">
+                <img th:src="@{/assets/images/bg-location-home.png}" alt="">
+                <a href="/theater/list" title="극장 페이지로 이동">
+                    극장
+                </a>
+                <a href="/theater/list" title="전체극장 페이지로 이동">
+                    전체극장
+                </a>
+                <a th:href="@{'/theater/detail' (brchNo=${theater.getBrchNo()})}" title="극장정보 페이지로 이동">
+                    극장정보
+                </a>
+            </div>
+        </div>
+    </div>
+    <div id="contents" class="no-padding">
+        <div class="theater-detail-page">
+            <img class="image" th:src="@{/assets/images/detail/img-theater-detail.jpg}" alt="">
+            <div class="theater-all">
+                <div class="theater-place">
+                    <ul class="area-place">
+                        <li class="on" th:each="area : ${areas}" onmouseover="showList(this)" onmouseout="hideList(this)">
+                            <a href="" class="city" th:text="${area.getName()}"></a>
+                            <div class="theater-list">
+                                <ul>
+                                    <li data-brch-no="1372" class="on" th:each="theater : ${theaterNames}">
+                                        <a class="theaterName" th:title="${theater.getName()}"
+                                           th:if="${theater.getAreaCode().equals(area.getCode())}" th:text="${theater.getName()}"
+                                           th:href="@{'/theater/detail' (brchNo=${theater.getBrchNo()})}">
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </li>
+                    </ul>
+                    <p class="name" th:if="${theater.getAreaCode().equals(theater.getBrchNo())}" th:text="${theater.getName()}"></p>
+                    <div class="button-right">
+                        <div class="block">
+                            <button class="like tooltip" type="button">
+                                <i class="iconset ico-like"></i>
+                                <span>선호극장</span>
+                            </button>
+                        </div>
+                        <p class="brchName" style="overflow: hidden; color: #ffffff; font-size: 3rem; padding: 40px 0 0 0; text-align: center; font-weight: 400; line-height: 1.1;" th:each="theater : ${theaterNames}" th:if="${detail.getBrchNo().equals(theater.getBrchNo())}" th:text="${theater.getName()}"></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="inner-wrap pt40">
+            <div class="tab-list mb40">
+                <ul>
+                    <li class="on">
+                        <a href="#tab01" title="극장정보 탭으로 이동">극장정보</a>
+                    </li>
+                    <li>
+                        <a th:href="@{'/booking/'}" title="상영시간표 탭으로 이동">상영시간표</a>
+                    </li>
+                </ul>
+            </div>
+            <div class="tab-container-wrap">
+                <div id="tab01" class="tab-container">
+                    <div class="theater-info mt40">
+                        <div th:if="${detail == null}">
+                            <p>상세 정보가 없습니다.</p>
+                        </div>
+                        <h1 th:if="${detail != null}" th:text="${detail.title}"></h1>
+                        <div th:if="${detail != null}" th:utext="${detail.content}"></div>
+
+                        <form id="addFacilityForm" th:action="@{/theater/detail}" method="post" >
+                            <input name="brchNo" th:value="${theater != null ? theater.brchNo : ''}" type="hidden">
+                            <label class="infoLabel">
+                                <input required class="input info" name="title" minlength="1" type="text" th:if="${isAdmin}" th:value="${detail != null ? detail.title : ''}">
+                            </label>
+                            <div id="hallList">
+                                <label>
+                                    <textarea name="content" id="content" cols="100" rows="8" th:if="${isAdmin}" th:text="${detail != null ? detail.content : ''}"></textarea>
+                                </label>
+                                <button name="changeButton" type="submit" th:if="${isAdmin}">변경 사항 저장</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <div id="data-container" class="data-container">
+                    <div class="movie-item" th:each="schedule : ${schedules}">
+                        <h3 id="movieNm"></h3>
+                        <p id="playTime"></p>
+                        <p th:if="${theater.getName().equals(schedule.getBrchNo())}" id="brchNo"></p>
+                        <p id="restSeatCnt"></p>
+                        <p id="theabExpoNm"></p>
+                    </div>
+<!--                    <div class="reserve-container">-->
+<!--                        <div class="movie-part">-->
+<!--                            <div class="reserve-title">영화</div>-->
+<!--                            <div class="sort-wrapper">-->
+<!--                                <div class="sort-rate sort-selected">예매율순</div>-->
+<!--                                <div class="sort-korean">가나다순</div>-->
+<!--                            </div>-->
+<!--                            <div class="movie-list">영화 목록 가져오기 </div>-->
+<!--                        </div>-->
+<!--                        <div class="theater-part">-->
+<!--                            <div class="reserve-title">극장</div>-->
+<!--                            <div></div>-->
+<!--                        </div>-->
+<!--                        <div class="day-part">-->
+<!--                            <div class="reserve-title">날짜</div>-->
+<!--                            <div class="reserve-date"></div>-->
+<!--                        </div>-->
+<!--                        <div class="time-part">-->
+<!--                            <div class="reserve-title">시간</div>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                </div>-->
+            </div>
+            <h3 class="title small mt40"></h3>
+        </div>
+    </div>
+    </div>
+</main>
+<th:block th:replace="~{fragments/common-footer.html :: commonFooter}"></th:block>
+</body>
+</html>

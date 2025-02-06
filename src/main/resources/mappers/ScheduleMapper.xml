@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="dev.mini.minibox.mappers.ScheduleMapper">
+
+    <select id="selectSchedules" resultType="dev.mini.minibox.entities.ScheduleEntity">
+        SELECT `id` AS `id`,
+               `area_cd` AS `areaCd`,
+               `area_cd_nm` AS `areaCdNm`,
+               `brch_no` AS `brchNo`,
+               `brch_nm` AS `brchNm`,
+               `theab_no` AS `theabNo`,
+               `movie_nm` AS `movieNm`,
+               `play_start_time` AS `playStartTime`,
+               `play_end_time` AS `playEndTime`,
+               `play_de` AS `playDe`
+        FROM `mega`.`schedules`
+    </select>
+
+    <select id="selectSchedule" resultType="dev.mini.minibox.entities.ScheduleEntity">
+        SELECT `id`              AS `id`,
+               `area_cd`         AS `areaCd`,
+               `area_cd_nm`      AS `areaCdNm`,
+               `brch_no`         AS `brchNo`,
+               `brch_nm`         AS `brchNm`,
+               `theab_no`        AS `theabNo`,
+               `movie_nm`        AS `movieNm`,
+               `play_start_time` AS `playStartTime`,
+               `play_end_time`   AS `playEndTime`,
+               `play_de`         AS `playDe`
+        FROM `mega`.`schedules`
+        WHERE `play_de` = DATE(#{date})
+          AND `area_cd` = #{areaNo}
+          AND `brch_no` = #{brchNo}
+          AND (#{movieNm} = '' || `movie_nm` = #{movieNm})
+        ORDER BY `play_start_time` ASC
+    </select>
+
+</mapper>

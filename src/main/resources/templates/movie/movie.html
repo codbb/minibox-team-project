@@ -1,0 +1,246 @@
+<!doctype html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="shortcut icon" th:href="@{'/assets/images/favicon.ico'}">
+    <title>MEET PLAY SHARE, 미니박스</title>
+    <link rel="stylesheet" th:href="@{'/assets/styles/movie.css'}" type="text/css">
+    <link rel="stylesheet" th:href="@{'/assets/styles/common.css'}" type="text/css">
+    <script defer th:src="@{'/assets/scripts/movie.js'}" type="text/javascript"></script>
+    <script defer th:src="@{'/assets/scripts/common.js'}" type="text/javascript"></script>
+</head>
+<body>
+<th:block th:replace="~{fragments/common-header-white.html :: commonCover}"></th:block>
+<th:block th:replace="~{fragments/common-header-white.html :: commonHeaderWhite}"></th:block>
+<th:block th:replace="~{fragments/common-header-white.html :: commonLogin}"></th:block>
+<div class="container">
+    <!-- 로그인 여부 -->
+    <input type="hidden" id="isLoggedIn" th:value="${session.user != null ? 'true' : 'false'}">
+    <input type="hidden" id="userNick" th:if="${session.user != null}" th:value="${session.user.getNickname()}">
+    <div class="page-util"></div>
+    <div id="contents">
+        <div class="inner-wrap">
+            <h2 class="tit">전체영화</h2>
+            <div class="tab-list">
+                <ul id="topMenu">
+                    <li class="on">
+                        <a th:href="@{'/movie'}" title="박스오피스 탭으로 이동">박스오피스</a>
+                    </li>
+                    <li>
+                        <a th:href="@{'/movie/comingsoon'}" title="상영예정작 탭으로 이동">상영예정작</a>
+                    </li>
+                    <li>
+                        <a th:href="@{'/movie/domestic'}" title="국내영화 탭으로 이동">국내</a>
+                    </li>
+                    <li>
+                        <a th:href="@{'/movie/overseas'}" title="해외영화 탭으로 이동">해외</a>
+                    </li>
+                    <li>
+                        <a th:href="@{'/movie/film'}" title="필름소사이어티 탭으로 이동">필름소사이어티</a>
+                    </li>
+                </ul>
+            </div>
+            <div class="movie-list-util mt40">
+                <div class="topSort" style="display: block">
+                    <div class="movie-sorting sortTab"></div>
+                    <div class="onair-condition">
+                        <button type="button" title="개봉작만 보기" class="btn-onair btnOnAir"
+                                th:style="|background-image: url(@{'/assets/images/common/btn/btn-on-air.png'})|">
+                            개봉작만
+                        </button>
+                    </div>
+                </div>
+                <div class="topSort" style="display: none">
+                    <div class="movie-sorting sortTab">
+                        <span><button type="button" class="btn btnOpenDt on">개봉일순</button></span>
+                        <span><button type="button" class="btn btnTitle">가나다순</button></span>
+                    </div>
+                </div>
+                <p class="no-result-count"><strong id="totCnt"></strong>개의 영화가 검색되었습니다.</p>
+                <div class="movie-search">
+                    <input type="text" title="영화명을 입력하세요" id="ibxMovieNmSearch" name="ibxMovieNmSearch"
+                           placeholder="영화명 검색" class="input-text">
+                    <button type="button" class="btn-search-input" id="btnSearch"
+                            th:style="|background-image: url(@{'/assets/images/common/btn/btn-search-input.png'});|">
+                        검색
+                    </button>
+                </div>
+            </div>
+            <div class="movie-list-util mt40 movie-list-util-result">
+                <div class="topSort" style="display: block">
+                    <div class="movie-sorting sortTab"></div>
+                    <div class="onair-condition">
+                        <button type="button" title="개봉작만 보기" class="btn-onair btnOnAir btnOnAir-allMovie"
+                                th:style="|background-image: url(@{'/assets/images/common/btn/btn-on-air.png'})|">
+                            개봉작만
+                        </button>
+                    </div>
+                </div>
+                <div class="topSort" style="display: none">
+                    <div class="movie-sorting sortTab">
+                        <span><button type="button" class="btn btnOpenDt on">개봉일순</button></span>
+                        <span><button type="button" class="btn btnTitle">가나다순</button></span>
+                    </div>
+                </div>
+                <p class="no-result-count"><strong id="allSearchTotCnt"></strong>개의 영화가 검색되었습니다.</p>
+                <div class="movie-search">
+                    <input type="text" title="영화명을 입력하세요" id="allMovieNmSearch" name="allMovieNmSearch"
+                           placeholder="영화명 검색" class="input-text">
+                    <button type="button" class="btn-search-input" id="btnAllMovieSearch"
+                            th:style="|background-image: url(@{'/assets/images/common/btn/btn-search-input.png'});|">
+                        검색
+                    </button>
+                </div>
+            </div>
+            <div class="movie-list">
+                <ol class="list movieList" id="movieList">
+                    <li class="no-img" th:each="movieBoxOffice : ${movieBoxOffices}">
+                        <input name="movie-id" type="hidden" th:value="${movieBoxOffice.getId()}">
+                        <input name="search-movieNm" type="hidden" th:value="${movieBoxOffice.getMovieNm()}">
+                        <input name="search-prdtStatNm" type="hidden" th:value="${movieBoxOffice.getPrdtStatNm()}">
+                        <input name="search-openDt" type="hidden" th:value="${movieBoxOffice.getOpenDt()}">
+                        <div class="movie-list-info">
+                            <a th:href="@{'/movie-detail?'(movieCd=${movieBoxOffice.getMovieCd()})}">
+                                <p class="rank"
+                                   th:style="@{'background: url(/assets/images/common/movie/bg-movie-list-rank.png) no-repeat 0 0;'}">
+                                    <span class="ir">위</span></p>
+                                <img th:src="${mainPosterMap[movieBoxOffice.getMovieCd()]}" th:alt="${movieBoxOffice.getMovieNm()} + '상세보기'" class="poster"> <!--포스터-->
+                                <div class="screen-type2">
+                                    <p th:id="@{'mx4d'}" style="">
+                                        <img th:src="@{'/assets/images/common/movie/type_mega_mx4d_d.png'}" alt="mx4d">
+                                    </p>
+                                    <p th:id="@{'dolby'}" style="">
+                                        <img th:src="@{'/assets/images/common/movie/type_dolbycinema_d.png'}" alt="dolby">
+                                    </p>
+                                    <p th:id="@{'atmos'}" style="">
+                                        <img th:src="@{'/assets/images/common/movie/type_dolbyatmos_d.png'}" alt="atmos">
+                                    </p>
+
+                                </div>
+                                <div class="movie-score">
+                                    <a th:href="@{'/movie-detail?'(movieCd=${movieBoxOffice.getMovieCd()})}" class="wrap movieBtn" th:title="${movieBoxOffice.getMovieNm()} + '상세보기'">
+                                        <div class="summary" th:text="${movieBoxOffice.getContent()}"></div>
+                                        <div class="my-score">
+                                            <div class="preview">
+                                                <p class="tit">관람평</p>
+                                                <p class="number" th:text="${avgRatingMap[movieBoxOffice.getMovieCd()]}"><span class="ir">점</span></p>
+                                            </div>
+                                        </div>
+                                    </a>
+                                </div>
+                            </a>
+                        </div>
+                        <div class="tit-area">
+                            <p th:class="|movie-grade ${gradeMap[movieBoxOffice.getMovieCd()]}|" th:style="|background-image: url(@{'/assets/images/common/txt/'+${gradeMap[movieBoxOffice.getMovieCd()]}+'.png'});|"></p>
+                            <p th:title="${movieBoxOffice.getMovieNm()}" class="tit" th:text="${movieBoxOffice.getMovieNm()}"></p>
+                        </div>
+                        <div class="rate-date">
+                            <span class="rate" th:text="'예매율 ' + ${reservePerMap[movieBoxOffice.getMovieNm()]} + '%'"></span>
+                            <span class="date" th:text="'개봉일 ' + ${movieBoxOffice.getOpenDt().replace('-','.')}"></span>
+                        </div>
+                        <div class="btn-util">
+                            <button type="button" class="button btn-like">
+                                <i title="" class="iconset ico-heart-toggle-gray" th:style="|background-image: url(@{'/assets/images/common/ico/ico-heart-toggle-gray.png'})|"></i>
+                                <span class="movieLikeCnt" th:text="${movieLikeMap[movieBoxOffice.getId()]}"></span>
+                            </button>
+                            <input name="stat-button" type="hidden" th:value="${prdtStatMap[movieBoxOffice.getMovieCd()]}">
+                            <div class="statBtnList">
+                                <p class="txt movieStat1">상영예정</p>
+                                <p class="txt movieStat2">개봉예정</p>
+                                <div class="case col-2 movieStat3">
+                                    <a href="/booking/" class="button purple bokdBtn" title="영화 예매하기">예매</a> <!--data-->
+                                    <a href="/booking/" class="button purple img splBtn"> <!--data-->
+                                        <img th:src="@{'/assets/images/common/btn/mov_list_db_btn.png'}" alt="dolby 버튼">
+                                    </a>
+                                </div>
+                                <div class="case movieStat4">
+                                    <a href="/booking/" class="button purple bokdBtn" title="영화 예매하기">예매</a> <!--data-->
+                                </div>
+                                <p class="txt movieStat5">상영종료</p>
+                            </div>
+                        </div>
+                    </li>
+                </ol>
+            </div>
+            <div class="movie-list movie-list-result">
+                <ol class="list movieList" id="movieResultList">
+                    <li class="no-img" th:each="movie : ${allMovies}">
+                        <input name="movie-id" type="hidden" th:value="${movie.getId()}">
+                        <input name="search-movieNm" type="hidden" th:value="${movie.getMovieNm()}">
+                        <input name="search-prdtStatNm" type="hidden" th:value="${movie.getPrdtStatNm()}">
+                        <input name="search-openDt" type="hidden" th:value="${movie.getOpenDt()}">
+                        <div class="movie-list-info">
+                            <a th:href="@{'/movie-detail?'(movieCd=${movie.getMovieCd()})}">
+                                <p class="rank"
+                                   th:style="@{'background: url(/assets/images/common/movie/bg-movie-list-rank.png) no-repeat 0 0;'}">
+                                    <span class="ir">위</span></p>
+                                <img th:src="${mainPosterAtMoviesMap[movie.getMovieCd()]}" th:alt="${movie.getMovieNm()} + '상세보기'" class="poster"> <!--포스터-->
+                                <div class="screen-type2">
+                                    <p th:id="@{'mx4d'}" style="">
+                                        <img th:src="@{'/assets/images/common/movie/type_mega_mx4d_d.png'}" alt="mx4d">
+                                    </p>
+                                    <p th:id="@{'dolby'}" style="">
+                                        <img th:src="@{'/assets/images/common/movie/type_dolbycinema_d.png'}" alt="dolby">
+                                    </p>
+                                    <p th:id="@{'atmos'}" style="">
+                                        <img th:src="@{'/assets/images/common/movie/type_dolbyatmos_d.png'}" alt="atmos">
+                                    </p>
+
+                                </div>
+                                <div class="movie-score">
+                                    <a th:href="@{'/movie-detail?'(movieCd=${movie.getMovieCd()})}" class="wrap movieBtn" th:title="${movie.getMovieNm()} + '상세보기'">
+                                        <div class="summary" th:text="${movie.getContent()}"></div>
+                                        <div class="my-score">
+                                            <div class="preview">
+                                                <p class="tit">관람평</p>
+                                                <p class="number" th:text="${avgRatingMap[movie.getMovieCd()]}"><span class="ir">점</span></p>
+                                            </div>
+                                        </div>
+                                    </a>
+                                </div>
+                            </a>
+                        </div>
+                        <div class="tit-area">
+                            <p th:class="|movie-grade ${gradeMap[movie.getMovieCd()]}|" th:style="|background-image: url(@{'/assets/images/common/txt/'+${gradeMap[movie.getMovieCd()]}+'.png'});|"></p>
+                            <p th:title="${movie.getMovieNm()}" class="tit" th:text="${movie.getMovieNm()}"></p>
+                        </div>
+                        <div class="rate-date">
+                            <span class="rate" th:text="'예매율 ' + ${reservePerMap[movie.getMovieNm()]} + '%'"></span>
+                            <span class="date" th:text="'개봉일 ' + ${movie.getOpenDt().replace('-','.')}"></span>
+                        </div>
+                        <div class="btn-util">
+                            <button type="button" class="button btn-like"> <!--data-->
+                                <i title="" class="iconset ico-heart-toggle-gray" th:style="|background-image: url(@{'/assets/images/common/ico/ico-heart-toggle-gray.png'})|"></i>
+                                <span class="movieLikeCnt" th:text="${movieLikeMap[movie.getId()]}"></span>
+                            </button>
+                            <input name="stat-button" type="hidden" th:value="${prdtStatMap[movie.getMovieCd()]}">
+                            <div class="statBtnList">
+                                <p class="txt movieStat1">상영예정</p>
+                                <p class="txt movieStat2">개봉예정</p>
+                                <div class="case col-2 movieStat3">
+                                    <a href="/booking/" class="button purple bokdBtn" title="영화 예매하기">예매</a> <!--data-->
+                                    <a href="/booking/" class="button purple img splBtn"> <!--data-->
+                                        <img th:src="@{'/assets/images/common/btn/mov_list_db_btn.png'}" alt="dolby 버튼">
+                                    </a>
+                                </div>
+                                <div class="case movieStat4">
+                                    <a href="/booking/" class="button purple bokdBtn" title="영화 예매하기">예매</a> <!--data-->
+                                </div>
+                                <p class="txt movieStat5">상영종료</p>
+                            </div>
+                        </div>
+                    </li>
+                </ol>
+            </div>
+            <div class="movie-list-no-result" id="noDataDiv" style="display: none">
+                <p>현재 상영중인 영화가 없습니다.</p>
+            </div>
+        </div>
+    </div>
+</div>
+<th:block th:replace="~{fragments/common-footer.html :: commonFooter}"></th:block>
+</body>
+</html>

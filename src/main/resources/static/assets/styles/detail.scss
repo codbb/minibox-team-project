@@ -1,0 +1,369 @@
+@charset "UTF-8";
+
+@import url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css");
+
+@import "./global";
+
+body {
+  overflow: auto;
+  overflow-y: scroll;
+  letter-spacing: 0;
+  line-height: 1.5;
+  font-size: 1rem;
+  font-weight: 400;
+  color: #444444;
+  font-family: "Pretendard Variable", "Pretendard", -apple-system, "BlinkMacSystemFont", "system-ui", "Roboto", "Helvetica Neue", "Segoe UI", "Apple SD Gothic Neo", "Noto Sans KR", "Malgun Gothic", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+.inner-wrap {
+  width: 1100px;
+  margin: 0 auto;
+}
+
+.inner-wrap:after, .inner-wrap:before {
+  content: '';
+  display: table;
+}
+
+.inner-wrap:after {
+  clear: both;
+}
+
+.tab-list:after, .tab-list:before {
+  content: '';
+  display: table;
+}
+
+a {
+  background-color: transparent;
+}
+
+div {
+  display: block;
+  unicode-bidi: isolate;
+}
+
+
+.ico-like {
+  width: 0.875rem;
+  height: 1rem;
+  background-image: url("https://img.megabox.co.kr/static/pc/images/common/ico/ico-like-line.png");
+}
+
+
+.theater-detail-page {
+  position: relative;
+  z-index: 1;
+  height: 11.875rem;
+  margin: 0;
+  color: #cccccc;
+  background-color: #111111;
+
+  .image {
+    position: absolute;
+    left: 50%;
+    top: 0;
+    z-index: 1;
+    width: 1100px;
+    margin: 0 0 0 -550px;
+    height: 100%;
+    background-position: center 0;
+    background-repeat: no-repeat;
+  }
+
+  .theater-all {
+    position: relative;
+    z-index: 4;
+    width: 1100px;
+    height: 100%;
+    margin: 0 auto;
+    padding: 0;
+
+    .theater-place {
+      display: block;
+      position: relative;
+      width: 100%;
+      color: #cccccc;
+
+      a {
+        text-decoration: none;
+      }
+
+      .area-place {
+        border-bottom: 0.0625rem solid #999999;
+        position: relative;
+
+        .on {
+          float: left;
+          margin-left: 4.5rem;
+
+          .city {
+            position: relative;
+            display: block;
+            color: #ffffff;
+            line-height: 3.75rem;
+            padding: 0 0.313rem;
+            text-decoration: none;
+            cursor: pointer;
+          }
+
+          .theater-list {
+            display: none;
+            position: absolute;
+            background-color: #ffffff;
+            border: 0.0625rem solid #cccccc;
+            border-radius: 0.625rem;
+            top: 3.75rem;
+            left: 0;
+            width: 100%;
+            padding: 1.563rem 1.875rem;
+            z-index: 10;
+            box-shadow: 0.625rem 0.625rem 0.625rem rgba(0, 0, 0, 0.2);
+
+            ul .on {
+              float: left;
+              margin: 0.313rem 0;
+
+
+              .theaterName {
+                position: relative;
+                display: block;
+                color: #444444;
+                padding: 0 0.688rem;
+              }
+
+              .theaterName:nth-child(n):after {
+                position: absolute;
+                content: '';
+                left: 0;
+                top: 0;
+                width: 0.0625rem;
+                height: 100%;
+                background: #e0e0e0;
+              }
+
+              .theaterName:hover {
+                color: #34a2eb;
+              }
+            }
+          }
+        }
+      }
+
+      .area-place:after {
+        clear: both;
+        content: '';
+        display: block;
+      }
+
+      .name {
+        overflow: hidden;
+        padding: 2.5rem 0 0 0;
+        text-align: center;
+        color: #ffffff;
+        font-size: 3.0666rem;
+        font-weight: 400;
+        line-height: 1.1;
+        text-shadow: 0.125rem 0.125rem 0.625rem rgba(0, 0, 0, 0.7);
+      }
+    }
+  }
+
+  P {
+    margin: 0;
+    padding: 0;
+  }
+
+  .button-right .like {
+    min-width: 6.25rem;
+    height: 2.25rem;
+    line-height: 2.125rem;
+    margin: 0 0.375rem 0 0;
+    font-size: 0.9333rem;
+    color: #ffffff;
+    text-decoration: none;
+    text-align: center;
+    border: 0.0625rem solid #706f72;
+    border-radius: 0.25rem;
+    background-color: rgba(0, 0, 0, 0.4);
+  }
+
+  .button-right .like.tooltip {
+    display: block;
+    position: absolute;
+    right: 0;
+    top: 6.688rem;
+    width: auto;
+    padding: 0 1.25rem;
+
+    .ico-like {
+      margin-right: 0.25rem;
+    }
+  }
+
+  .button-right .like.tooltip:hover {
+    background-color: #ffffff;
+    color: #000000;
+
+    .iconset.ico-like {
+      width: 0.875rem;
+      height: 1rem;
+      background-image: url("https://img.megabox.co.kr/static/pc/images/common/ico/ico-like-on.png");
+    }
+  }
+}
+
+.inner-wrap {
+  width: 1100px;
+  margin: 0 auto;
+}
+
+.tab-list {
+  position: static;
+  width: 100%;
+  background-color: #ffffff;
+
+  > ul {
+    position: relative;
+    width: 100%;
+    height: 2.625rem;
+
+    > li {
+      float: left;
+      height: 2.625rem;
+      margin: 0;
+      border-top: 0.0625rem solid #ebebeb;
+      border-left: 0.0625rem solid #ebebeb;
+      border-bottom: 0.0625rem solid #503396;
+
+      :last-child {
+        border-right: 0.0625rem solid #ebebeb;
+      }
+
+      .on > a {
+        z-index: 3;
+        background-color: #ffffff;
+      }
+
+      > a {
+        position: relative;
+        display: block;
+        width: 100%;
+        height: 2.563rem;
+        line-height: 2.5rem;
+        padding: 0;
+        text-align: center;
+        color: #222222;
+        text-decoration: none;
+        font-size: 1.0667rem;
+      }
+
+      a:visited {
+        color: #503396;
+        text-decoration: none;
+      }
+    }
+
+    > li.on {
+      border: 0.0625rem solid #503396;
+      border-bottom: 0;
+
+      +li {
+        border-left: 0;
+      }
+    }
+
+    > li:first-child {
+      width: 50%;
+    }
+
+    > li:last-child {
+      width: 50%;
+    }
+
+  }
+}
+
+.pt40 { // padding-top 40
+  padding-top: 40px !important;
+}
+
+.mb40 { // margin-bottom 40
+  margin-bottom: 40px !important;
+}
+
+.tab-container-wrap .tab-container {
+  display: block;
+}
+
+.theater-info {
+  padding: 0;
+  border-bottom: 0.0625rem solid #ebebeb;
+
+  .info {
+    padding: 0 0 1.25rem 0;
+    width: 68.8rem;
+  }
+
+  p {
+    margin: 0;
+  }
+}
+
+.mt40 { // margin-top 40
+  margin-top: 40px !important;
+}
+
+h2.title {
+  font-weight: 400;
+  letter-spacing: -1px;
+  line-height: 1.1;
+}
+
+h2.title.small {
+  padding: 0 0 1rem 0;
+  font-size: 1.4666rem;
+  color: #503396;
+}
+
+.mt70 { // margin-top 70
+  margin-top: 70px !important;
+}
+
+h3.title {
+  margin: 0;
+  font-weight: 400;
+  line-height: 1.1;
+}
+
+h3.title.small {
+  padding: 0 0 0.0625rem 0;
+  font-size: 1.2rem;
+  color: #222222;
+}
+
+.theater-facility {
+  overflow: hidden;
+  padding: 0.125rem 0 0 0;
+  
+  p {
+    float: left;
+    width: 6.938rem;
+    margin: 0 1.875rem 0 0;
+    padding: 0;
+    text-align: center;
+
+    .iconset {
+      margin-bottom: 0.625rem;
+    }
+  }
+}
+
+.ico-facility-comfort {
+  width: 6.938rem;
+  height: 6.938rem;
+}

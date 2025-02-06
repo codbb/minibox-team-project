@@ -1,0 +1,704 @@
+@charset "UTF-8";
+
+@import url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css");
+
+@import "./global";
+
+body {
+  overflow: auto;
+  overflow-y: scroll;
+  letter-spacing: 0;
+  line-height: 1.5;
+  font-size: 1rem;
+  font-weight: 400;
+  color: #444444;
+  font-family: "Pretendard Variable", "Pretendard", -apple-system, "BlinkMacSystemFont", "system-ui", "Roboto", "Helvetica Neue", "Segoe UI", "Apple SD Gothic Neo", "Noto Sans KR", "Malgun Gothic", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+div {
+  display: block;
+  unicode-bidi: isolate;
+}
+
+.inner-wrap {
+  width: 1100px;
+  margin: 0 auto;
+}
+
+.inner-wrap:after, .inner-wrap:before {
+  content: '';
+  display: table;
+}
+
+.inner-wrap:after {
+  clear: both;
+}
+
+a {
+  background-color: transparent;
+}
+
+b, strong {
+  font-weight: 700;
+}
+
+.ico-tab-movie {
+  width: 2.438rem;
+  height: 2rem;
+  background-image: url("https://img.megabox.co.kr/static/pc/images/common/ico/ico-tab-movie.png");
+}
+
+.ico-tab-theater {
+  width: 2.188rem;
+  height: 1.875rem;
+  background-image: url("https://img.megabox.co.kr/static/pc/images/common/ico/ico-tab-theater-on.png");
+}
+
+.mt40 {
+  margin-top: 2.5rem !important;
+}
+
+.mt60 {
+  margin-top: 3.75rem !important;
+}
+
+.mb30 {
+  margin-bottom: 1.875rem !important;
+}
+
+.mb20 {
+  margin-bottom: 1.25rem !important;
+}
+
+.font-green {
+  color: #037b94 !important;
+}
+
+#container {
+  width: 100%;
+  margin: 0;
+  padding: 2.5rem 0 0 0;
+
+}
+
+.time-table-page .movie-choice-area {
+  overflow: hidden;
+  position: relative;
+  width: 100%;
+  height: 18.75rem;
+  margin: 0;
+  border: 0.188rem solid #686571;
+  border-radius: 0.625rem;
+  padding: 0;
+
+  .ltab-layer-cont {
+    position: absolute;
+    left: 10.25rem;
+    top: 0;
+    visibility: hidden;
+    opacity: 0;
+    display: block;
+    width: calc(100% - 10.25rem);
+    height: 18.75rem;
+    padding: 0;
+  }
+}
+
+.time-table-page .movie-choice-area .tab-left-area {
+  float: left;
+  width: 9.063rem;
+  height: 100%;
+
+  > ul > li {
+    display: block;
+    text-align: center;
+    width: 100%;
+    height: 9.281rem;
+    line-height: 9.5rem;
+    border: 0.063rem solid #d8d9db;
+    background-color: #f2f4f5;
+
+    > a {
+      display: block;
+      color: #444444;
+      font-size: 1.24rem;
+      font-weight: 400;
+      text-decoration: none
+
+    }
+
+    li.on {
+      background-color: #ffffff;
+      border-right: none;
+    }
+  }
+}
+
+.ir {
+  text-indent: -9999px;
+  position: fixed;
+  top: -9999px;
+  font-size: 0.063rem;
+  width: 0.063rem;
+  height: 0.063rem;
+  opacity: 0;
+}
+
+.time-table-page .movie-choice-area .has-img {
+  padding: 0 12.875rem 0 0;
+
+  .wrap .list-section .list li {
+    float: left;
+    width: 33.333%;
+    padding: 0;
+  }
+
+  .poster-section {
+    display: block;
+  }
+}
+
+.time-table-page .movie-choice-area .poster-section {
+  position: absolute;
+  right: 0;
+  top: 0;
+  width: 12.875rem;
+  height: 100%;
+  background: url("https://img.megabox.co.kr/static/pc/images/reserve/bg-poster-view.png") no-repeat 0 0;
+  background-size: auto 100%;
+
+  .table {
+    display: block;
+    width: 100%;
+    height: 100%;
+
+    .td {
+      display: block;
+      width: 100%;
+      height: 100%;
+      text-align: center;
+
+      img.poster {
+        width: 100%;
+        height: 100%;
+      }
+    }
+  }
+}
+
+.time-table-page .movie-choice-area .wrap {
+  float: left;
+  position: relative;
+  width: 100%;
+  height: 100%;
+  padding: 0 2.5rem;
+
+  .tab-list-choice {
+    width: 100%;
+    height: 3.375rem;
+    border-bottom: 0.063rem solid #d8d9db;
+
+    > ul {
+      padding-top: 1.438rem;
+
+      > li {
+        float: left;
+
+        > a {
+          font-size: 0.9333rem;
+          margin-right: 0.938rem;
+          text-decoration: none;
+          color: #555555;
+          border-bottom: 0.125rem solid #ffffff;
+          padding-bottom: 0.563rem;
+          letter-spacing: -1px;
+        }
+
+        > a:hover a.on {
+          color: #555555;
+          border-bottom: 0.125rem solid #555555;
+          font-weight: 400;
+        }
+
+        > a.on {
+          color: #555555;
+          border-bottom: 0.125rem solid #555555;
+          font-weight: 400;
+        }
+      }
+
+      > li:first-child {
+        margin-left: 0;
+      }
+
+      > li:after {
+        content: '';
+        vertical-align: top;
+        display: inline-block;
+        box-sizing: border-box;
+      }
+    }
+  }
+
+  .list-section {
+    overflow: hidden;
+    height: 15rem;
+    padding: 1.25rem 0;
+
+    .scroll {
+      height: 12.5rem;
+
+      .list {
+        overflow: hidden;
+        position: relative;
+        display: block;
+        min-height: 8.625rem;
+
+        .li {
+          float: left;
+          width: 25%;
+          padding: 0;
+
+          .btn {
+            display: block;
+            width: 100%;
+            height: 1.688rem;
+            margin: 0;
+            padding: 0 1.75rem 0 0.625rem;
+            color: #444444;
+            border: 0;
+            text-align: left;
+            background-color: transparent;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+            overflow: hidden;
+          }
+
+          .btn.on {
+            color: #ffffff;
+            font-weight: 400;
+            background-color: #555555;
+          }
+        }
+      }
+    }
+
+    .tab-area .tab-layer-cont.on {
+      display: block;
+    }
+
+    .tab-area .tab-layer-cont {
+      display: none;
+    }
+  }
+}
+
+.time-table-page .movie-choice-area .ltab-layer-cont {
+  position: absolute;
+  left: 10.25rem;
+  top: 0;
+  visibility: hidden;
+  opacity: 0;
+  display: block;
+  width: calc(100% - 10.25rem);
+  height: 18.75rem;
+  padding: 0;
+}
+
+.time-table-page .movie-choice-area .ltab-layer-cont.on {
+  visibility: visible;
+  opacity: 1;
+}
+
+.tab-area .tab-layer-cont {
+  display: none;
+}
+
+.tab-area .tab-layer-cont.on {
+  display: block;
+}
+
+.mCustomScrollbar{
+  touch-action: pinch-zoom;
+}
+
+.mCustomScrollBox {
+  position: relative;
+  overflow: hidden;
+  height: 100%;
+  max-width: 100%;
+  outline: 0;
+  direction: ltr;
+}
+
+.mCSB_container {
+  overflow: hidden;
+  width: auto;
+  height: auto;
+}
+
+.m-scroll .mCSB_inside > .mCSB_container {
+  margin-right: 0.313rem;
+}
+
+.mCSB_inside > .mCSB_container {
+  margin-right: 1.875rem;
+}
+
+.m-scroll .mCSB_scrollTools {
+  width: 0.313rem;
+  opacity: 1;
+}
+
+.mCSB_scrollTools .mCSB_draggerContainer {
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  height: auto;
+}
+
+.mCSB_scrollTools .mCSB_dragger {
+  cursor: pointer;
+  width: 100%;
+  height: 1.875rem;
+  z-index: 1;
+
+  .mCSB_dragger_bar {
+    width: 0.313rem;
+    background-color: #555555;
+    position: relative;
+    height: 100%;
+    margin: 0 auto;
+    text-align: center;
+  }
+}
+
+.mCSB_scrollTools .mCSB_draggerRail {
+  background-color: #ebebeb;
+  width: 0.313rem;
+  border-radius: 0.125rem;
+  height: 100%;
+  margin: 0 auto;
+}
+
+.time-table-page .movie-choice-area:after {
+  display: block;
+  clear: both;
+  content: '';
+}
+
+.box-alert {
+  position: relative;
+  padding: 1.25rem 3.125rem;
+  border-radius: 0.625rem;
+  background-color: #ece6fa;
+
+  .ico-bell {
+    display: block;
+    position: absolute;
+    left: 1.563rem;
+    top: 1.563rem;
+  }
+
+  strong {
+    position: relative;
+    display: inline-block;
+    padding: 0 1.375rem 0 0;
+    color: #503396;
+  }
+}
+
+.ico-bell {
+  width: 0.875rem;
+  height: 1rem;
+  background-image: url("https://img.megabox.co.kr/static/pc/images/common/ico/ico-bell.png");
+}
+
+.time-table-page h3.tit {
+  line-height: 2.75rem;
+}
+
+h3.tit {
+  margin: 0;
+  padding: 0 0 1rem 0;
+  font-size: 1.6rem;
+  font-weight: 400;
+  color: #503396;
+  line-height: 1.1;
+}
+
+.time-schedule {
+  width: 100%;
+
+  .wrap {
+    height: 4.563rem;
+    border: 0.063rem solid #d8d9db;
+    border-right: 0;
+    border-left: 0;
+    position: relative;
+  }
+
+  .ico-cld-pre {
+    margin-right: 0.063rem;
+  }
+
+  .ico-cld-next {
+    margin-left: 0.063rem;
+  }
+
+  .date-list {
+    width: 61.25rem;
+    overflow: hidden;
+    float: left;
+    height: 4.5rem;
+  }
+
+  .year {
+    position: absolute;
+    top: 0;
+    font-size: 0.8667rem;
+    width: 4.375rem;
+    height: 1.75rem;
+    line-height: 1.75rem;
+    margin-top: -14px;
+    border: 0.063rem solid #d8d9db;
+    border-radius: 0.938rem;
+    text-align: center;
+    background-color: #ffffff;
+    font-weight: 400;
+  }
+
+  .date-area {
+    height: 4.563rem;
+    float: left;
+
+    button {
+      width: 4.375rem;
+      height: 4.5rem;
+      border: 0;
+      background-color: transparent;
+      float: left;
+      border-bottom: 0.188rem solid transparent;
+
+      span {
+        vertical-align: bottom;
+        line-height: 1.1;
+      }
+
+      em {
+        display: block;
+        font-size: 1.2rem;
+        line-height: 1.1;
+        padding: 0.313rem 0;
+      }
+    }
+
+    button.on {
+      background-color: #f7f8f9;
+      border-bottom: 0.188rem solid #503396;
+    }
+
+    button.sat {
+      color: #3b5fcb;
+    }
+
+    button.holi {
+      color: #e81002;
+    }
+
+    button.disabled {
+      font-weight: 400;
+      opacity: 0.5;
+      cursor: default;
+    }
+  }
+
+  .bg-line {
+    float: left;
+    position: relative;
+    margin-left: 0.0625rem;
+  }
+
+  .bg-line:before {
+    content: '';
+    width: 0.063rem;
+    height: 2.938rem;
+    display: block;
+    position: absolute;
+    top: 0.75rem;
+    left: 0;
+    background-color: #ebebeb;
+  }
+
+  .btn-calendar-large {
+    width: 3.125rem;
+    height: 4.5rem;
+    border: 0;
+    font-size: 0;
+    line-height: 0;
+    text-indent: -999px;
+    border-bottom: 0 !important;
+    background-color: transparent !important;
+  }
+}
+
+.btn-calendar-large {
+  background: url("https://img.megabox.co.kr/static/pc/images/common/ico/ico-calendar-w20.png") no-repeat center;
+}
+
+.time-schedule:after, .time-schedule:before {
+  content: '';
+  display: table;
+}
+
+.time-schedule .btn-next, .time-schedule .btn-pre {
+  width: 1.875rem;
+  height: 4.563rem;
+  border: 0 !important;
+  background-color: transparent !important;
+  float: left;
+}
+
+.ico-cld-pre {
+  width: 0.438rem;
+  height: 0.75rem;
+  background-image: url("https://img.megabox.co.kr/static/pc/images/common/ico/ico-cld-pre.png");
+}
+
+.ico-cld-next {
+  width: 0.438rem;
+  height: 0.75rem;
+  background-image: url("https://img.megabox.co.kr/static/pc/images/common/ico/ico-cld-next.png");
+}
+
+.time-schedule .btn-next em, .time-schedule .btn-pre em {
+  text-indent: -10000px;
+  height: 0;
+  font-size: 0;
+  padding: 0;
+  margin: 0;
+}
+
+.time-schedule .date-area button.disabled {
+  font-weight: 400;
+  opacity: 0.5;
+  cursor: default;
+
+  em {
+    color: #666666 !important;
+    font-weight: 400;
+  }
+
+  em+span {
+    color: #666666 !important;
+    font-weight: 400;
+  }
+}
+
+.movie-option {
+  width: 100%;
+  overflow: hidden;
+
+  .option {
+    float: left;
+
+    ul li {
+      float: left;
+      margin-right: 0.938rem;
+      line-height: 1rem;
+    }
+
+    .iconset {
+      margin-right: 0.313rem;
+      margin-top: -3px;
+    }
+  }
+
+  .rateing-lavel {
+    float: right;
+
+    a {
+      position: relative;
+      padding-left: 1.438rem;
+      line-height: 1rem;
+      text-decoration: none;
+    }
+
+    a:before {
+      content: '';
+      width: 1rem;
+      height: 1rem;
+      display: block;
+      position: absolute;
+      top: 0.125rem;
+      left: 0;
+      background: url("https://img.megabox.co.kr/static/pc/images/common/ico/ico-exclamation.png") center no-repeat;
+    }
+  }
+}
+
+.ico-stage {
+  width: 0.75rem;
+  height: 0.75rem;
+  background-image: url("https://img.megabox.co.kr/static/pc/images/common/ico/ico-greeting-option01.png");
+}
+
+.ico-user {
+  width: 0.75rem;
+  height: 0.75rem;
+  background-image: url("https://img.megabox.co.kr/static/pc/images/common/ico/ico-greeting-option02.png");
+}
+
+.ico-open {
+  width: 0.75rem;
+  height: 0.75rem;
+  background-image: url("https://img.megabox.co.kr/static/pc/images/common/ico/ico-greeting-option03.png");
+}
+
+.ico-goods {
+  width: 0.75rem;
+  height: 0.75rem;
+  background-image: url("https://img.megabox.co.kr/static/pc/images/common/ico/ico-greeting-option04.png");
+}
+
+.ico-singalong {
+  width: 0.75rem;
+  height: 0.75rem;
+  background-image: url("https://img.megabox.co.kr/static/pc/images/common/ico/ico-greeting-option05.png");
+}
+
+.ico-gv {
+  width: 0.75rem;
+  height: 0.75rem;
+  background-image: url("https://img.megabox.co.kr/static/pc/images/common/ico/ico-greeting-option06.png");
+}
+
+.ico-sun {
+  width: 0.75rem;
+  height: 0.75rem;
+  background-image: url("https://img.megabox.co.kr/static/pc/images/common/ico/ico-greeting-option-sun.png");
+}
+
+.ico-brunch {
+  width: 0.75rem;
+  height: 0.75rem;
+  background-image: url("https://img.megabox.co.kr/static/pc/images/common/ico/ico-time-brunch.png");
+}
+
+.ico-moon {
+  width: 0.75rem;
+  height: 0.75rem;
+  background-image: url("https://img.megabox.co.kr/static/pc/images/common/ico/ico-greeting-option-moon.png");
+}
+
+.reserve.theater-list-box {
+  width: 100%;
+  display: table;
+  border-top: 0;
+}

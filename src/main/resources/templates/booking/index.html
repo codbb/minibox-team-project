@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>MEET PLAY SHARE, 미니박스</title>
+    <link rel="shortcut icon" th:href="@{'/assets/images/Mainfavicon.ico'}">
+    <link rel="stylesheet" th:href="@{'/assets/styles/common.css'}" type="text/css">
+    <link rel="stylesheet" th:href="@{'/assets/styles/booking.css'}" type="text/css">
+    <script defer th:src="@{'/assets/scripts/common.js'}" type="text/javascript"></script>
+    <script defer th:src="@{'/assets/scripts/index.js'}" type="text/javascript"></script>
+</head>
+<body>
+<th:block th:replace="~{fragments/common-header-white.html :: commonCover}"></th:block>
+<th:block th:replace="~{fragments/common-header-white.html :: commonHeaderWhite}"></th:block>
+<th:block th:replace="~{fragments/common-header-white.html :: commonLogin}"></th:block>
+
+<div class="inner-wrap">
+    <div class="quick-reserve">
+        <div class="tit-util">
+            <h2 class="tit">빠른예매</h2>
+        </div>
+        <div class="quick-reserve-include -visible" style="height: 571px">
+            <div>
+                <p style="font-weight: 400;">오늘 포함 3일의 상영일정을 조회할 수 있습니다.</p>
+            </div>
+            <div class="time-schedule quick">
+                <div class="wrap">
+                    <button class="btn-pre" title="이전 날짜 보기" type="button" id="prevBtn">
+                        <i class="iconset ico-cld-pre"></i>
+                        <em>이전</em>
+                    </button>
+                    <div class="date-list">
+                        <div class="date-area" id="formDeList">
+                            <div class="wrap" id="dateWrapper" style="position: absolute">
+                                <button class="time-box" style="position: relative;"></button>
+                            </div>
+                        </div>
+                    </div>
+                    <button class="btn-next" title="다음 날짜 보기" type="button" id="nextBtn">
+                        <i class="iconset ico-cld-next"></i>
+                        <em>다음</em>
+                    </button>
+                </div>
+            </div>
+            <div class="quick-reserve-area" style="height: 531px">
+                <div class="movie-choice">
+                    <p class="tit">영화</p>
+                    <div class="list-area">
+                        <div class="all-list">
+                            <button class="btn-tab on" id="movieAll" type="button">전체</button>
+                            <div class="list">
+                                <div class="scroll" id="movieList">
+                                    <div class="customScrollBox" id="mCSB_1" style="max-height: none;" tabindex="0">
+                                        <div class="mCSB_container" id="mCSB_1_container"
+                                             style="position: relative; top: 0; left: 0;" dir="ltr">
+                                            <ul>
+                                                <li>
+                                                    <button style="width: 100%;display: flex;align-items: center;flex-direction: row;" class="btn" th:each="movieBoxOffice : ${movieBoxOffices}"
+                                                            type="button" th:data-movieid="${movieBoxOffice.getMovieNm()}">
+                                                        <i th:class="|movie-grade ${gradeMap[movieBoxOffice.getMovieCd()]}|" th:style="|background-image: url(@{'/assets/images/common/txt/'+${gradeMap[movieBoxOffice.getMovieCd()]}+'.png'});background-size: 20px 20px;height: 20px;width: 20px;margin-right: 5px;|"></i>
+                                                        <span style="flex: 1" class="txt"
+                                                              th:text="${movieBoxOffice.getMovieNm()}"></span>
+                                                        <span class="getMovieNm"></span>
+                                                    </button>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                        <div class="mCSB_scrollTools" id="mCSB_scrollbar vertical"
+                                             style="display: block">
+                                            <div class="mCSB_draggerContainer">
+                                                <div class="mCSB_dragger" id="mCSB_dragger_vertical"
+                                                     style="position: absolute; min-height: 30px; display: block; max-height: 310px; top: 0; height: 47px;">
+                                                    <div class="mCSB_dragger_bar" style="line-height: 30px"></div>
+                                                </div>
+                                                <div class="mCSB_draggerRail"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="view-area">
+                            <div class="choice-all" id="choiceMovieNone" style="display: block">
+                                <strong>모든영화</strong>
+                                <span>목록에서 영화를 선택하세요.</span>
+                            </div>
+                            <div class="choice-list" id="choiceMovieList" style="display: none">
+                                <div class="bg">
+                                    <div class="img" th:each="movieBoxOffice : ${movieBoxOffices}">
+                                        <img th:src="${movieBoxOffice.getPoster()}" style="width: 100%; height: 100%;"
+                                             alt="movie-poster">
+                                    </div>
+                                </div>
+                                <div class="bg"></div>
+                                <div class="bg"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="theater-choice">
+                    <div class="tit-area">
+                        <p class="tit">극장</p>
+                    </div>
+                    <div class="list-area" id="quickCity">
+                        <div class="all-list">
+                            <button type="button" class="btn-tab on">전체</button>
+                            <div class="list">
+                                <div class="scroll" id="brchList">
+                                    <ul>
+                                        <li class="on" th:each="area : ${areas}">
+                                            <button class="btn area-btn" type="button">
+                                                <span class="txt" th:text="${area.getName()}"></span>
+                                            </button>
+                                            <div class="depth theater-list" style="display: none">
+                                                <div class="detail-list m-scroll area-cd10 mCustomScrollbar _mCS_4 mCS_no_scrollbar">
+                                                    <div id="mCSB_4"
+                                                         class="mCustomScrollBox mCS-light mCSB_vertical mCSB_inside"
+                                                         style="max-height: none" tabindex="0">
+                                                        <div id="mCSB_4_container"
+                                                             class="mCSB_container mCS_no_scrollbar_y"
+                                                             style="position: relative; top: 0; left: 0" dir="ltr">
+                                                            <ul>
+                                                                <li th:each="theater : ${theaters}">
+                                                                    <button style="width: 100%" class="btn" type="button" th:data-areano="${area.getCode()}" th:data-brchno="${theater.getBrchNo()}"
+                                                                            th:if="${theater.getAreaCode().equals(area.getCode())}"
+                                                                            th:text="${theater.getName()}">
+                                                                    </button>
+                                                                </li>
+                                                            </ul>
+                                                        </div>
+                                                        <div id="mCSB_4_scrollbar_vertical"
+                                                             class="mCSB_scrollTools mCSB_4_scrollbar mCS-light mCSB_scrollTools_vertical">
+                                                            <div class="mCSB_draggerContainer">
+                                                                <div id="mCSB_4_dragger_vertical" class="mCSB_dragger"
+                                                                     style="position: absolute; min-height: 30px; display: none; top: 0">
+                                                                    <div class="mCSB_dragger_bar"
+                                                                         style="line-height: 30px"></div>
+                                                                </div>
+                                                                <div class="mCSB_draggerRail"></div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="view-area">
+                        <div class="choice-all" id="choiceBrchNone" style="display: none;">
+                            <strong>전체극장</strong>
+                            <span>목록에서 극장을 선택하세요.</span>
+                        </div>
+                        <div class="choice-list" id="choiceBrchList" style="display: block;">
+                            <div class="bg"></div>
+                            <div class="bg"></div>
+                            <div class="bg"></div>
+                            <div class="bg"></div>
+                            <div class="bg"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="time-choice">
+                    <div class="tit-area">
+                        <p class="tit">시간</p>
+                        <div class="right legend">
+                            <i class="iconset ico-sun" title="조조"></i>
+                            조조
+                            <i class="iconset ico-brunch" title="브런치"></i>
+                            브런치
+                            <i class="iconset ico-moon" title="심야"></i>
+                            심야
+                        </div>
+                    </div>
+                    <div class="hour-schedule">
+                        <button class="btn-prev-time" type="button">이전 시간 보기</button>
+                        <div class="wrap">
+                            <div class="view"
+                                 style="position: absolute; width: 63.438rem; transition: left 0.3s ease; left: -420px">
+                                <button class="hour" disabled data-time="00" type="button">00</button>
+                                <button class="hour" disabled data-time="01" type="button">01</button>
+                                <button class="hour" disabled data-time="02" type="button">02</button>
+                                <button class="hour" disabled data-time="03" type="button">03</button>
+                                <button class="hour" disabled data-time="04" type="button">04</button>
+                                <button class="hour" disabled data-time="05" type="button">05</button>
+                                <button class="hour" disabled data-time="06" type="button">06</button>
+                                <button class="hour" disabled data-time="07" type="button">07</button>
+                                <button class="hour" disabled data-time="08" type="button">08</button>
+                                <button class="hour" disabled data-time="09" type="button">09</button>
+                                <button class="hour" disabled data-time="10" type="button">10</button>
+                                <button class="hour" disabled data-time="11" type="button">11</button>
+                                <button class="hour" disabled data-time="12" type="button">12</button>
+                                <button class="hour" disabled data-time="13" type="button">13</button>
+                                <button class="hour" disabled data-time="14" type="button">14</button>
+                                <button class="hour" disabled data-time="15" type="button">15</button>
+                                <button class="hour" disabled data-time="16" type="button">16</button>
+                                <button class="hour" disabled data-time="17" type="button">17</button>
+                                <button class="hour" disabled data-time="18" type="button">18</button>
+                                <button class="hour" disabled data-time="19" type="button">19</button>
+                                <button class="hour" disabled data-time="20" type="button">20</button>
+                                <button class="hour" disabled data-time="21" type="button">21</button>
+                                <button class="hour" disabled data-time="22" type="button">22</button>
+                                <button class="hour" disabled data-time="23" type="button">23</button>
+                                <button class="hour" disabled data-time="24" type="button">24</button>
+                            </div>
+                        </div>
+                        <button class="btn-next-time" type="button">다음 시간 보기</button>
+                    </div>
+                    <div class="movie-schedule-area" style="overflow: auto">
+                        <div class="no-result" id="playScheduleNonList" style="display: none">
+                            <i class="iconset ico-movie-time"></i>
+                            <p class="txt">
+                                영화와 극장을 선택하시면
+                                <br>
+                                상영시간표를 비교하여 볼 수 있습니다.
+                            </p>
+                        </div>
+                        <div class="result" style="overflow: auto">
+                            <div class="scroll m-scroll mCustomScrollbar _mCS_21" id="playScheduleList">
+                                <div class="mCustomScrollBox mCS-light mCSB_vertical mCSB_inside" id="mCSB_21"
+                                     style="max-height: none" tabindex="0">
+                                    <div class="mCSB_container" id="mCSB_21_container"
+                                         style="position: relative; top: 0; left: 0;" dir="ltr">
+                                        <ul>
+                                            <li>
+                                                <button class="btn schedule-btn" type="button">
+<!--                                                        th:each="schedule : ${schedules}" th:data-id="${schedule.getId()}" th:data-arr="${schedule.getMovieNm()} + ',' + ${schedule.getBrchNm()} + ',' + ${schedule.getTheabNo()} + ',' + ${schedule.getPlayDe()} + ',' + ${schedule.getPlayStartTime()} + ',' + ${schedule.getPlayEndTime()}">-->
+                                                    <div class="legend"></div>
+                                                    <span class="time">
+                                                        <strong title="상영 시작"></strong>
+                                                        <span><em title="상영 종료"></em></span>
+                                                    </span>
+                                                    <span class="title">
+                                                        <strong title="영화제목"></strong>
+                                                        <em></em>
+                                                    </span>
+                                                    <span class="info">
+                                                        <span class="theater" title="극장"></span>
+                                                        <span class="theab" title="관"></span>
+                                                        <span class="seat">
+                                                            <strong class="now" title="잔여좌석"></strong>
+                                                            <span>/</span>
+                                                            <em class="all" title="전체좌석"></em>
+                                                        </span>
+                                                    </span>
+                                                </button>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <div class="mCSB_scrollTools mCSB_21_scrollbar mCS-light mCSB_scrollTools_vertical"
+                                         id="mCSB_21_scrollbar_vertical" style="display: block">
+                                        <div class="mCSB_draggerContainer">
+                                            <div class="mCSB_dragger" id="mCSB_21_dragger_vertical"
+                                                 style="position: absolute; min-height: 1.875rem; display: block; height: 6.688rem; max-height: 26.25rem; top: 0.5rem">
+                                                <div class="mCSB_dragger_bar" style="line-height: 1.875rem"></div>
+                                                <div class="mCSB_draggerRail"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+<!--            <div style="width: 25rem; border: 0.0625rem solid #d8d9db; border-radius: 0.25rem; margin: 1rem 0; padding: 1rem;">-->
+<!--                <p>상영일정 가져오기</p>-->
+<!--                <label>-->
+<!--                    <input type="date" id="playDate">-->
+<!--                </label>-->
+<!--                <label>-->
+<!--                    <input placeholder="위의 극장을 클릭해주세요" type="text" id="brchNo" readonly>-->
+<!--                </label>-->
+<!--                <button class="&#45;&#45;button -purple" onclick="fetchSchedule()" style="width: 5rem;">가져오기</button>-->
+<!--            </div>-->
+        </div>
+    </div>
+    <div class="content-wrap seat-container">
+        <div class="big-div2">
+            <h2>좌석</h2>
+<!--            <div style="display: grid; grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr; gap: 0.5rem;">-->
+<!--                <button th:each="seat : ${seats}" th:data-id="${seat.getId()}" th:data-num="${seat.getSeatNo()}"-->
+<!--                        class="seat-button" type="button">-->
+<!--                    <span th:
+text="${seat.getSeatNo()}"></span>-->
+<!--                </button>-->
+<!--            </div>-->
+            <div class="seat-wrapper">
+            </div>
+            <button class="seat-btn --button -purple" type="button">좌석선택</button>
+            <button class="seat-btn-back --button -gblue" type="button">뒤로가기</button>
+        </div>
+    </div>
+
+    <div class="content-wrap payment-container">
+        <div class="big-div3">
+            <h2>결제하기</h2>
+            <h3>예매정보</h3>
+            <div class="box">
+                <p>
+                    <span>영화 제목 : </span>
+                    <span class="getMovieNms"></span>
+                </p>
+                <p>
+                    <span>극장 이름 : </span>
+                    <span class="getBrchNm"></span>
+                </p>
+                <p>
+                    <span>상영관 : </span>
+                    <span class="getTheabNo"></span>
+                    <span>관</span>
+                </p>
+                <p>
+                    <span>상영 날짜 : </span>
+                    <span class="getPlayDe"></span>
+                </p>
+                <p>
+                    <span>시작 시간 : </span>
+                    <span class="getPlayStartTime"></span>
+                </p>
+                <p>
+                    <span>종료 시간 : </span>
+                    <span class="getPlayEndTime"></span>
+                </p>
+                <p>
+                    <span>선택 좌석 : </span>
+                    <span class="view-seat" id="view-seat"></span>
+                </p>
+                <p>
+                    <span class="total-amount" id="total-amount"></span>
+                </p>
+            </div>
+            <div>
+                <button class="payment-btn --button -purple" type="button">카드결제</button>
+                <button class="payment-btn-back --button -gblue" type="button">뒤로가기</button>
+            </div>
+
+            <div class="payment-form" id="paymentForm">
+                <div class="title">
+                    <h2>카드 결제</h2>
+                </div>
+                <div>
+                    <table>
+                        <tr>
+                            <th>카드번호</th>
+                            <td>
+                                <label>
+                                    <input class="cardNm" name="cardNm" placeholder="4자리" type="number">
+                                    <span>-</span>
+                                    <input class="cardNm" name="cardNm" placeholder="4자리" type="number">
+                                    <span>-</span>
+                                    <input class="cardNm" name="cardNm" placeholder="4자리" type="number">
+                                    <span>-</span>
+                                    <input class="cardNm" name="cardNm" placeholder="4자리" type="number">
+                                </label>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>유효기간</th>
+                            <td>
+                                <label>
+                                    <input placeholder="yy" type="text">
+                                    <span>/</span>
+                                    <input placeholder="MM" type="text">
+                                </label>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>비밀번호</th>
+                            <td>
+                                <label>
+                                    <input maxlength="4" minlength="4" placeholder="숫자 4자리" type="password">
+                                </label>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>금액</th>
+                            <td>
+                                <label>
+                                    <input placeholder="금액" class="charge" name="charge" type="text" readonly>
+                                    <span>원</span>
+                                </label>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+                <button class="payment-form-btn --button -purple" type="button">결제하기</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="content-wrap booking-container">
+        <h3>확인을 누르시면 예매가 완료됩니다.</h3>
+        <form id="bookingForm">
+            <label>
+                <input class="schedule-input" name="scheduleId" type="text" hidden>
+            </label>
+            <label>
+                <input class="seat-input" name="seatIds" type="text" hidden>
+            </label>
+            <label>
+                <input class="charge-input" name="charge" type="text" hidden>
+            </label>
+            <button class="--button -purple" type="submit">확인</button>
+        </form>
+    </div>
+<!--    <div>-->
+<!--        <label>-->
+<!--            <input type="date" id="playDate">-->
+<!--        </label>-->
+<!--        <label>-->
+<!--            <input type="text" id="brchNo">-->
+<!--        </label>-->
+<!--        <button onclick="fetchSchedule()">조회</button>-->
+<!--    </div>-->
+</div>
+<th:block th:replace="~{fragments/common-footer.html :: commonFooter}"></th:block>
+</body>
+</html>

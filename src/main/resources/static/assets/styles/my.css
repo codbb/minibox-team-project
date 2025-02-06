@@ -1,0 +1,301 @@
+table {
+  font-size: 1rem;
+  width: 100%;
+}
+table tr, table td {
+  padding: 0.5rem;
+}
+
+.--obj-table {
+  text-align: center;
+}
+.--obj-table > thead > tr {
+  background-color: rgba(80, 51, 150, 0.8);
+  border: 0.0625rem solid rgba(80, 51, 150, 0.5019607843);
+  border-radius: 0.25rem;
+  color: #ffffff;
+  letter-spacing: 0.5rem;
+  font-size: 1.12rem;
+  user-select: none;
+}
+.--obj-table > thead > tr > th {
+  border-left: 0.0625rem solid #ffffff;
+}
+.--obj-table > thead > tr > th:first-child {
+  border-left: 0;
+}
+.--obj-table > tbody > tr {
+  border: 0.0625rem solid rgba(80, 51, 150, 0.5019607843);
+  border-radius: 0.25rem;
+  padding: 0.5rem;
+  margin: 0.5rem 0;
+}
+.--obj-table > tbody > tr:hover {
+  background-color: rgba(80, 51, 150, 0.062745098);
+}
+.--obj-table > tbody > tr > td {
+  border-left: 0.0625rem solid rgba(80, 51, 150, 0.5019607843);
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+.--obj-table > tbody > tr > td:first-child {
+  border-left: 0;
+}
+
+.box {
+  border: none;
+  box-shadow: 0 0 0.125rem 0.0625rem rgba(80, 51, 150, 0.5019607843);
+  border-radius: 0.25rem;
+  padding: 1rem 0.5rem;
+  user-select: none;
+}
+.box:hover {
+  background-color: rgba(80, 51, 150, 0.062745098);
+}
+.box:focus-within {
+  background-color: rgba(80, 51, 150, 0.062745098);
+}
+
+.content-wrap {
+  box-sizing: border-box;
+  padding: 2rem 0 var(--footer-height);
+  min-height: calc(100vh - var(--header-height));
+  margin-bottom: calc(-1 * var(--footer-height));
+}
+.content-wrap > form {
+  width: 25rem;
+  background-color: #ffffff;
+  box-sizing: border-box;
+  box-shadow: 0 0 0.125rem 0.0625rem rgba(80, 51, 150, 0.5019607843);
+  display: none;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 9;
+}
+.content-wrap > form.-visible {
+  display: block;
+}
+.content-wrap > form > .title {
+  padding: 0 0.5rem;
+  background-color: #503396;
+  color: #ffffff;
+}
+.content-wrap > form > .title > h2 {
+  font-weight: 400;
+  margin: 0;
+  padding: 0.5rem 0;
+}
+.content-wrap > form > ._text {
+  background-color: #ffffff;
+  font-size: 1.25rem;
+  padding: 0.5rem;
+}
+.content-wrap > form > .button-wrap {
+  align-items: center;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  gap: 0.5rem;
+  padding: 0.5rem;
+}
+.content-wrap > div {
+  margin-bottom: 2rem;
+}
+.content-wrap > div > p {
+  font-size: 1.5rem;
+  font-weight: 400;
+  margin: 3rem 0;
+}
+.content-wrap > div > div > p {
+  font-size: 1.25rem;
+  margin: 1rem 0;
+}
+.content-wrap > div > .my-menu {
+  display: grid;
+  grid-template-columns: 1fr 7fr;
+  gap: 2rem;
+}
+.content-wrap > div > .my-menu > .select-container > .select-wrap {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: stretch;
+  font-size: 1.25rem;
+  text-align: center;
+  margin-top: 4rem;
+  box-shadow: 0 0 0.125rem 0.0625rem rgba(80, 51, 150, 0.5019607843);
+  border-radius: 0.25rem;
+  overflow: hidden;
+}
+.content-wrap > div > .my-menu > .select-container > .select-wrap > li {
+  padding: 1rem 0;
+  cursor: pointer;
+  user-select: none;
+}
+.content-wrap > div > .my-menu > .select-container > .select-wrap > li:hover {
+  background-color: rgba(80, 51, 150, 0.5019607843);
+  color: #ffffff;
+}
+.content-wrap > div > .my-menu > .select-container > .select-wrap > li.on {
+  background-color: #503396;
+  color: #ffffff;
+}
+.content-wrap > div > .my-menu .my-container {
+  top: 10%;
+  display: none;
+  visibility: hidden;
+  opacity: 0;
+  transform: scale(95%);
+  transition-duration: 250ms;
+  transition-property: top, opacity, transform;
+  transition-timing-function: ease;
+}
+.content-wrap > div > .my-menu .my-container.-visible {
+  top: 0;
+  display: block;
+  visibility: visible;
+  opacity: 1;
+  transform: scale(100%);
+}
+.content-wrap > div > .my-menu .my-container > div {
+  width: 25rem;
+  text-align: center;
+  box-sizing: border-box;
+}
+.content-wrap > div > .my-menu .my-container > div > button {
+  margin: 1rem 0;
+}
+.content-wrap > div > .my-menu .my-container > div > form > button {
+  margin: 1rem 0 0 0;
+}
+.content-wrap > div > .my-menu .my-container > div > form > table {
+  margin: 0 auto;
+}
+.content-wrap > div > .my-menu > .password-container {
+  display: none;
+}
+.content-wrap > div > .my-menu > .password-container.-visible {
+  display: block;
+}
+.content-wrap > div > .my-menu > .password-container > div {
+  width: 25rem;
+  text-align: center;
+  box-sizing: border-box;
+}
+.content-wrap > div > .my-menu > .password-container > div > form > button {
+  margin: 1rem 0 0 0;
+}
+.content-wrap > div > .my-menu > .password-container > div > form > table {
+  margin: 0 auto;
+}
+.content-wrap > div > .my-menu .reserve-container {
+  display: none;
+  visibility: hidden;
+  opacity: 0;
+  transform: scale(95%);
+  transition-duration: 250ms;
+  transition-property: opacity, transform;
+  transition-timing-function: ease;
+  margin-bottom: 2rem;
+}
+.content-wrap > div > .my-menu .reserve-container.-visible {
+  visibility: visible;
+  display: block;
+  opacity: 1;
+  transform: scale(100%);
+}
+.content-wrap > div > .my-menu .reserve-container > .reserve-wrap {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 1rem;
+}
+.content-wrap > div > .my-menu .reserve-container > .reserve-wrap > .empty {
+  text-align: center;
+  box-shadow: 0 0 0.125rem 0.0625rem rgba(80, 51, 150, 0.5019607843);
+  border-radius: 0.25rem;
+  padding: 2rem 0;
+  font-size: 1rem;
+}
+.content-wrap > div > .my-menu .reserve-container > .reserve-wrap > .box {
+  margin: 0;
+  overflow: hidden;
+  padding: 0;
+}
+.content-wrap > div > .my-menu .reserve-container > .reserve-wrap > .box > .ticket {
+  background-color: rgba(80, 51, 150, 0.8);
+  color: #ffffff;
+  text-align: center;
+  letter-spacing: 1.25rem;
+  font-size: 1rem;
+  padding: 0.5rem;
+}
+.content-wrap > div > .my-menu .reserve-container > .reserve-wrap > .box > table {
+  padding: 0.5rem;
+  width: 100%;
+}
+.content-wrap > div > .my-menu .reserve-container > .reserve-wrap > .box > table > tbody > tr > th {
+  white-space: nowrap;
+}
+.content-wrap > div > .my-menu .reserve-container > .reserve-wrap > .box > div {
+  text-align: center;
+  position: relative;
+}
+.content-wrap > div > .my-menu .reserve-container > .reserve-wrap > .box > div > .--button.-gblue {
+  bottom: 0;
+  width: 5rem;
+  height: 2rem;
+  font-size: 0.8rem;
+  padding: 0;
+  margin: 0.5rem auto;
+}
+.content-wrap > div > .my-menu .review-container {
+  visibility: hidden;
+  display: none;
+  opacity: 0;
+  transform: scale(95%);
+  transition-duration: 250ms;
+  transition-property: opacity, transform;
+  transition-timing-function: ease;
+}
+.content-wrap > div > .my-menu .review-container.-visible {
+  visibility: visible;
+  display: block;
+  opacity: 1;
+  transform: scale(100%);
+}
+.content-wrap > div > .my-menu .review-container > .review-wrap > .--obj-table > thead > tr {
+  display: grid;
+  grid-template-columns: 2fr 3fr 1fr 1.5fr;
+}
+.content-wrap > div > .my-menu .review-container > .review-wrap > .--obj-table > tbody > tr {
+  display: grid;
+  grid-template-columns: 2fr 3fr 1fr 1.5fr;
+}
+.content-wrap > div > .my-menu .like-container {
+  display: none;
+  visibility: hidden;
+  opacity: 0;
+  transform: scale(95%);
+  transition-duration: 250ms;
+  transition-property: opacity, transform;
+  transition-timing-function: ease;
+}
+.content-wrap > div > .my-menu .like-container.-visible {
+  visibility: visible;
+  display: block;
+  opacity: 1;
+  transform: scale(100%);
+}
+.content-wrap > div > .my-menu .like-container > .like-wrap > .--obj-table > thead > tr {
+  display: grid;
+  grid-template-columns: 2fr 1fr 3fr 1fr;
+}
+.content-wrap > div > .my-menu .like-container > .like-wrap > .--obj-table > tbody > tr {
+  display: grid;
+  grid-template-columns: 2fr 1fr 3fr 1fr;
+}
+
+/*# sourceMappingURL=my.css.map */

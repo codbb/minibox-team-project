@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>미니박스</title>
+    <link rel="shotcut icon" th:href="@{'/assets/images/favicon.ico'}">
+    <link rel="stylesheet" th:href="@{'/assets/styles/common.css'}" type="text/css">
+    <link rel="stylesheet" th:href="@{'/assets/styles/index.css'}" type="text/css">
+    <script defer th:src="@{'/assets/scripts/common.js'}" type="text/javascript"></script>
+    <script defer th:src="@{'/assets/scripts/home.js'}" type="text/javascript"></script>
+</head>
+<body>
+
+<th:block th:replace="~{fragments/common-header-white.html :: commonCover}"></th:block>
+<header id="header">
+    <div class="ci">
+        <a th:href="@{'/'}"><img th:src="@{'/assets/images/logo-new2.png'}" alt="mini-box"></a>
+    </div>
+    <div class="content-wrap-header">
+        <ul class="util">
+            <li><a th:href="@{'/benefit'}">VIP LOUNGE</a></li>
+            <li><a th:href="@{'/benefit'}">멤버십</a></li>
+            <li><a th:href="@{'/support'}">고객센터</a></li>
+            <li class="spring"></li>
+            <li class="login-li" th:if="${session.user == null}"><a class="login-button" href="#">로그인</a></li>
+            <li th:if="${session.user == null}"><a th:href="@{'/register'}">회원가입</a></li>
+            <li th:if="${session.user != null}"><a th:href="@{'/my'}" th:text="${session.user.getNickname()}"></a></li>
+            <li th:if="${session.user != null}"><a class="logout" th:href="@{'/logout'}">로그아웃</a></li>
+            <li><a th:href="@{'/booking/'}">빠른예매</a></li>
+        </ul>
+        <div class="menu">
+            <ul>
+                <li class="item-wrap">
+                    <a href="">
+                        <img th:src="@{'/assets/images/common/header-white/ico-sitemap-white.png'}" alt="menu">
+                    </a>
+                    <a href="#layer-header-search" class="header-search">
+                        <img th:src="@{'/assets/images/common/header-white/ico-search-white.png'}" alt="search">
+                    </a>
+                </li>
+            </ul>
+            <ul class="menu-wrap">
+                <li><a th:href="@{'/movie'}"><img th:src="@{'/assets/images/common/header-white/menu-txt-movie-white.png'}" alt="movie"></a></li>
+                <li><a th:href="@{'/booking/'}"><img th:src="@{'/assets/images/common/header-white/menu-txt-reserve-white.png'}" alt="booking"></a></li>
+                <li><a th:href="@{'/theater/list'}"><img th:src="@{'/assets/images/common/header-white/menu-txt-theater-white.png'}" alt="theater"></a></li>
+            </ul>
+            <span class="spring"></span>
+            <ul class="menu-wrap">
+                <li><a th:href="@{'/event'}"><img th:src="@{'/assets/images/common/header-white/menu-txt-event-white.png'}" alt="event"></a></li>
+                <li><a th:href="@{'/store'}"><img th:src="@{'/assets/images/common/header-white/menu-txt-store-white.png'}" alt="store"></a></li>
+                <li><a th:href="@{'/benefit'}"><img th:src="@{'/assets/images/common/header-white/menu-txt-benefit-white.png'}" alt="benefit"></a></li>
+            </ul>
+            <ul>
+                <li class="item-wrap">
+                    <a th:href="@{'/booking/'}"><img th:src="@{'/assets/images/common/header-white/ico-schedule-white.png'}" alt="booking"></a>
+                    <a th:href="@{'/my'}"><img th:src="@{'/assets/images/common/header-white/ico-mymega-white.png'}" alt="my"></a>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div id="layer-header-search" class="header-layer layer-header-search">
+        <div class="wrap">
+            <div class="rank-cont">
+                <div class="list">
+                    <ol>
+                        <li th:each="movieBoxOffice : ${movieBoxOffices}">
+                            <em th:text="${movieBoxOffice.getRank()}"></em>
+                            <a th:href="@{'/movie-detail?'(movieCd=${movieBoxOffice.getMovieCd()})}" th:text="${movieBoxOffice.getMovieNm()}"></a>
+                        </li>
+                    </ol>
+                </div>
+            </div>
+            <div class="header-search-area">
+                <input type="text" id="headerMovieName" title="영화명을 검색해 주세요" placeholder="영화를 검색하세요" class="input-text">
+                <button type="button" id="btnHeaderSearch" class="btn-search" th:style="|background: url(@{'/assets/images/common/btn/btn-header-search.png'}) no-repeat center;|"></button>
+            </div>
+        </div>
+    </div>
+</header>
+<th:block th:replace="~{fragments/common-header-white.html :: commonLogin}"></th:block>
+
+<section id="main">
+    <div class="bg-cover" th:each="movieBoxOffice, iterStat : ${movieBoxOffices}" th:if="${movieBoxOffice.getRank() == 1}">
+        <img th:src="${mainPosterMap[movieBoxOffice.getMovieCd()]}" alt="background-main-poster">
+    </div>
+    <div class="content-wrap">
+        <div class="main-top-list">
+<!--            <div class="spring"></div>-->
+            <button class="btn-box-office">박스오피스</button>
+            <a class="a-box-office" th:href="@{'/movie'}">더 많은 영화 보기 <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAACXBIWXMAAAsTAAALEwEAmpwYAAAANklEQVR4nGNgGFHgPxSMWoAT/B8NIkLg/8gOov9UBgx0t4AY8J8SzaMWUAX8H42D4R9EgxIAADOHLuA9EPgjAAAAAElFTkSuQmCC" alt="plus"></a>
+        </div>
+
+        <ul class="main-movie-list">
+            <li class="movie-wrap" th:each="movieBoxOffice, iterStat : ${movieBoxOffices}">
+                <div class="poster-wrap">
+                    <p th:text="${movieBoxOffice.getRank()}"></p>
+                    <img th:src="${mainPosterMap[movieBoxOffice.getMovieCd()]}" th:alt="${movieBoxOffice.getMovieNm()} + '상세보기'" class="poster">
+                    <a th:href="@{'/movie-detail?'(movieCd=${movieBoxOffice.getMovieCd()})}">
+                        <div>
+                            <div class="movie-text" th:text="${movieBoxOffice.getContent()}"></div>
+                            <div class="star-text" th:text="'평점 ' + ${getAvgRatingMap[movieBoxOffice.getMovieCd()]}"></div>
+                        </div>
+                    </a>
+                </div>
+                <div class="btn-util">
+                    <input type="hidden" name="isLogin" th:value="${session.user != null ? 'true' : 'false'}">
+                    <input type="hidden" id="userNick" th:if="${session.user != null}" th:value="${session.user.getNickname()}">
+                    <input type="hidden" name="movieId" th:value="${movieBoxOffice.getId()}">
+                    <button class="btn-like" type="button">
+                        <i title="" class="iconset ico-heart-toggle-gray" th:style="|background-image: url(@{'/assets/images/common/ico/ico-heart-toggle-main.png'})|"></i>
+                        <span class="like-cnt" th:text="${movieLikeMap[movieBoxOffice.getId()]}"></span>
+                    </button>
+                    <a th:href="@{'/booking/'}"><button class="--button -gblue">예매</button></a>
+                </div>
+            </li>
+        </ul>
+        <div class="search-list">
+            <ul>
+                <li>
+                    <label>
+                        <input class="search-input all-movie-search" placeholder="영화명을 입력해 주세요." type="text">
+                    </label>
+                    <button type="button" class="all-movie-search-input" id="btnAllMovieSearch" th:style="|background-image: url(@{'/assets/images/common/ico/ico-search-white.png'});|"></button>
+                </li>
+                <li><a class="li-item" th:href="@{'/booking/'}" style="justify-content: center;align-items: center;display: flex;gap: 0.7rem;"><img th:src="@{/assets/images/common/ico/ico-schedule-main.png}"><span>상영시간표</span></a></li>
+                <li><a class="li-item" th:href="@{'/movie'}" style="justify-content: center;align-items: center;display: flex;gap: 0.7rem;"><img th:src="@{/assets/images/common/ico/ico-boxoffice-main.png}"><span>박스오피스</span></a></li>
+                <li><a class="li-item" th:href="@{'/booking/'}" style="justify-content: center;align-items: center;display: flex;gap: 0.7rem;"><img th:src="@{/assets/images/common/ico/ico-quick-reserve-main.png}"><span>빠른예매</span></a></li>
+            </ul>
+        </div>
+    </div>
+</section>
+
+<!--<section id="benefit">-->
+<!--    <div class="content-wrap">-->
+<!--        <h2>혜택</h2>-->
+<!--    </div>-->
+<!--</section>-->
+
+<!--<section id="curation">-->
+<!--    <div class="content-wrap">-->
+<!--        <h2>큐레이션</h2>-->
+<!--    </div>-->
+<!--</section>-->
+
+<section id="info">
+    <div class="content-wrap">
+        <h2>미니박스 안내</h2>
+        <div class="info-container">
+            <div>
+                <a href=""><img src="https://img.megabox.co.kr/static/pc/images/2024Re/theater/bg-main-dolbycinema.png" alt="dolby-cinema"></a>
+            </div>
+            <div>
+                <a href=""><img src="https://img.megabox.co.kr/static/pc/images/2024Re/theater/bg-main-mx4d.png" alt="mx4d"></a>
+            </div>
+            <div>
+                <a href=""><img src="https://img.megabox.co.kr/static/pc/images/2024Re/theater/bg-main-dolbyatmos.png" alt="dolby-atmos"></a>
+            </div>
+            <div>
+                <a href=""><img src="https://img.megabox.co.kr/static/pc/images/2024Re/theater/bg-main-private.png" alt="private"></a>
+            </div>
+            <div>
+                <a href=""><img src="https://img.megabox.co.kr/static/pc/images/2024Re/theater/bg-main-suite.png" alt="suite"></a>
+            </div>
+            <div>
+                <a href=""><img src="https://img.megabox.co.kr/static/pc/images/2024Re/theater/bg-main-boutiq.png" alt="boutiq"></a>
+            </div>
+        </div>
+    </div>
+    <div class="txt-wrap">
+        <div class="content-wrap">
+            <ul>
+                <li>지점</li>
+                <li><a href="">대구신세계[동대구] [대구신세계]대관 행사에 따른 조조시간 운영 안내</a></li>
+                <li><a href="">24.12.23</a></li>
+                <li><a href="">더 보기</a></li>
+            </ul>
+        </div>
+    </div>
+    <div class="content-wrap info-wrap">
+        <div class="cell">
+            <img src="https://img.megabox.co.kr/static/pc/images/common/ico/ico-main-customer.png" alt="customer">
+            <span>고객센터</span>
+        </div>
+        <div class="cell">
+            <img src="https://img.megabox.co.kr/static/pc/images/common/ico/ico-main-faq.png" alt="faq">
+            <span>자주 묻는 질문</span>
+        </div>
+        <div class="cell">
+            <img src="https://img.megabox.co.kr/static/pc/images/common/ico/ico-main-qna.png" alt="qna">
+            <span>1:1 문의</span>
+        </div>
+        <div class="cell">
+            <img src="https://img.megabox.co.kr/static/pc/images/common/ico/ico-main-group.png" alt="group">
+            <span>단체/대관 문의</span>
+        </div>
+        <div class="cell">
+            <img src="https://img.megabox.co.kr/static/pc/images/common/ico/ico-main-lost.png" alt="lost">
+            <span>분실물 문의/접수</span>
+        </div>
+        <div class="cell">
+            <img src="https://img.megabox.co.kr/static/pc/images/common/ico/ico-main-boutique.png" alt="boutique">
+            <span>더 부티크 프라이빗 대관예매</span>
+        </div>
+    </div>
+</section>
+
+<th:block th:replace="~{fragments/common-footer.html :: commonFooter}"></th:block>
+
+</body>
+</html>

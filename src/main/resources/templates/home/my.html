@@ -1,0 +1,287 @@
+<!doctype html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>MEET PLAY SHARE, 미니박스</title>
+    <link rel="shortcut icon" th:href="@{'/assets/images/Mainfavicon.ico'}">
+    <link rel="stylesheet" th:href="@{'/assets/styles/common.css'}" type="text/css">
+    <link rel="stylesheet" th:href="@{'/assets/styles/my.css'}">
+    <script defer th:src="@{'/assets/scripts/my.js'}"></script>
+    <script defer th:src="@{'/assets/scripts/common.js'}" type="text/javascript"></script>
+</head>
+<body>
+<th:block th:replace="~{fragments/common-header-white.html :: commonCover}"></th:block>
+<th:block th:replace="~{fragments/common-header-white.html :: commonHeaderWhite}"></th:block>
+<th:block th:replace="~{fragments/common-header-white.html :: commonLogin}"></th:block>
+
+<div class="content-wrap">
+    <form id="deleteForm" class="delete-form">
+        <div class="title"><h2>탈퇴하기</h2></div>
+        <div class="_text">정말로 탈퇴하시겠습니까?</div>
+        <div class="_text">탈퇴를 하시면</div>
+        <div class="_text">개인정보는 모두 삭제됩니다.</div>
+        <div class="button-wrap">
+            <button class="--button -purple" type="submit">탈퇴하기</button>
+            <button class="--button -gblue cancel" type="button">취소</button>
+        </div>
+    </form>
+    <form id="paymentDeleteForm" class="payment-delete-form">
+        <div class="title"><h2>결제 취소하기</h2></div>
+        <div class="_text">정말로 결제를 취소 하시겠습니까?</div>
+        <div class="_text">결제를 취소 하시면</div>
+        <div class="_text">같은 결제의 예매 건은 모두 취소됩니다.</div>
+        <div class="button-wrap">
+            <button class="--button -purple" type="submit">결제취소</button>
+            <button class="--button -gblue cancel" type="button">취소</button>
+        </div>
+    </form>
+    <h1 class="title">마이페이지</h1>
+    <div th:if="${session.user == null}">
+        <p class="login-need">로그인이 필요합니다.</p>
+    </div>
+    <div th:if="${session.user != null}">
+        <div>
+            <p>
+                <span>환영합니다.</span>
+                <b><span th:text="${session.user.getNickname}"></span></b>
+                <span>님</span>
+            </p>
+        </div>
+        <div class="my-menu">
+            <div class="select-container">
+                <ul class="select-wrap">
+                    <li class="my-btn">내 정보</li>
+                    <li class="password-btn">비밀번호 변경</li>
+                    <li class="reserve-btn on">예매 내역</li>
+                    <li class="review-btn">댓글 내역</li>
+                    <li class="like-btn">좋아요 내역</li>
+                </ul>
+            </div>
+
+            <div class="my-container">
+                <h2>내 정보</h2>
+                <div class="box">
+                    <form id="modifyForm">
+                        <table th:each="user : ${user}">
+                            <tr>
+                                <th>이메일</th>
+                                <td>
+                                    <label class="--obj-label" data-id="email">
+                                        <input name="email" th:value="${user.getEmail()}" type="email" readonly disabled>
+                                    </label>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>비밀번호</th>
+                                <td>
+                                    <label class="--obj-label" data-id="password">
+                                        <input maxlength="50" minlength="6" name="password" placeholder="비밀번호 입력" type="password">
+                                        <span class="_warning">올바른 비밀번호를 입력해 주세요.</span>
+                                    </label>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>닉네임</th>
+                                <td>
+                                    <label class="--obj-label" data-id="nickname">
+                                        <input name="nickname" maxlength="10" minlength="2" placeholder="닉네임 입력" th:value="${user.getNickname()}" type="text">
+                                        <span class="_warning">올바른 닉네임을 입력해 주세요.</span>
+                                    </label>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>연락처</th>
+                                <td>
+                                    <label class="--obj-label" data-id="contact">
+                                        <input name="contact" maxlength="11" minlength="10" placeholder="'-'없이 입력 ex)01012345678" th:value="${user.getContact()}" type="tel">
+                                        <span class="_warning">올바른 연락처를 입력해 주세요.</span>
+                                    </label>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>생년월일</th>
+                                <td>
+                                    <label class="--obj-label" data-id="birthdate">
+                                        <input name="birthdate" placeholder="생년월일 8자리 ex) 19990909" th:value="${user.getBirthdate()}" type="date">
+                                        <span class="_warning">올바른 생년월일를 입력해 주세요.</span>
+                                    </label>
+                                </td>
+                            </tr>
+                        </table>
+                        <button class="--button -purple" type="submit">수정하기</button>
+                    </form>
+                </div>
+                <div>
+                    <button class="--button -gblue" id="userDeleteBtn" type="button">회원탈퇴</button>
+                </div>
+            </div>
+
+            <div class="password-container">
+                <h2>비밀번호 변경</h2>
+                <div class="box">
+                    <form id="changePasswordForm">
+                        <table>
+                            <tr>
+                                <th>현재 비밀번호</th>
+                                <td>
+                                    <label class="--obj-label" data-id="beforePassword">
+                                        <input maxlength="50" minlength="6" name="beforePassword" placeholder="비밀번호 입력" type="password">
+                                        <span class="_warning">올바른 비밀번호를 입력해 주세요.</span>
+                                    </label>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>새 비밀번호</th>
+                                <td>
+                                    <label class="--obj-label" data-id="newPassword">
+                                        <input maxlength="50" minlength="6" name="newPassword" placeholder="새 비밀번호 입력" type="password">
+                                        <span class="_warning">올바른 비밀번호를 입력해 주세요.</span>
+                                    </label>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>새 비밀번호 확인</th>
+                                <td>
+                                    <label class="--obj-label" data-id="newPasswordCheck">
+                                        <input maxlength="50" minlength="6" name="newPasswordCheck" placeholder="비밀번호 재입력" type="password">
+                                        <span class="_warning">비밀번호가 일치하지 않습니다.</span>
+                                    </label>
+                                </td>
+                            </tr>
+                        </table>
+                        <button class="--button -purple" type="submit">변경하기</button>
+                    </form>
+                </div>
+            </div>
+
+            <div class="reserve-container -visible">
+                <h2>예매 내역</h2>
+                <div th:if="${!#lists.isEmpty(bookings)}"><p>예매 취소는 상영 시작시간 전까지 가능합니다.</p></div>
+                <div class="reserve-wrap">
+                    <div class="empty" th:if="${#lists.isEmpty(bookings)}">예매한 영화가 없습니다.</div>
+                    <div class="box" th:each="booking : ${bookings}">
+                        <div class="ticket">
+                            예매표
+                        </div>
+                        <table>
+                            <tr>
+                                <th>예매 번호</th>
+                                <td th:text="${booking.getId()}" th:data-id="${booking.getId()}"></td>
+                            </tr>
+                            <tr>
+                                <th>영화 제목</th>
+                                <td th:text="${booking.getMovieNm}"></td>
+                            </tr>
+                            <tr>
+                                <th>극장 이름</th>
+                                <td th:text="${booking.getBrchNm()}"></td>
+                            </tr>
+                            <tr>
+                                <th>상  영  관</th>
+                                <td th:text="${booking.getTheabNo()}"></td>
+                            </tr>
+                            <tr>
+                                <th>상영 날짜</th>
+                                <td th:text="${booking.getPlayDe()}" th:data-date="${booking.getPlayDe()}"></td>
+                            </tr>
+                            <tr>
+                                <th>시작 시간</th>
+                                <td th:text="${booking.getPlayStartTime()}"></td>
+                            </tr>
+                            <tr>
+                                <th>종료 시간</th>
+                                <td th:text="${booking.getPlayEndTime()}"></td>
+                            </tr>
+                            <tr>
+                                <th>선택 좌석</th>
+                                <td th:text="${booking.getSeatNo()}"></td>
+                            </tr>
+                        </table>
+                        <div>
+<!--                            <button th:if="${booking.getPlayDe().isAfter(T(java.time.LocalDate).now()) or booking.getPlayStartTime().isBefore(T(java.time.LocalTime).now())}" th:data-id="${booking.getPaymentId()}" class="&#45;&#45;button -gblue payment-cancel" type="button">예매 취소</button>-->
+                            <button th:if="${booking.getPlayDe().isAfter(T(java.time.LocalDate).now()) or (booking.getPlayStartTime().isAfter(T(java.time.LocalTime).now()) and booking.getPlayDe().equals(T(java.time.LocalDate).now()))}" th:data-id="${booking.getPaymentId()}" class="--button -gblue payment-cancel" type="button">예매 취소</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="review-container">
+                <h2>작성한 댓글</h2>
+                <div class="review-wrap">
+                    <table class="--obj-table">
+                        <thead>
+                        <tr>
+                            <th th:scope="col">영화 제목</th>
+                            <th th:scope="col">댓글 내용</th>
+                            <th th:scope="col">관람평</th>
+                            <th th:scope="col">작성일</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr th:if="${#lists.isEmpty(reviews)}">
+                            <td class="empty" colspan="4">댓글을 작성한 영화가 없습니다.</td>
+                        </tr>
+                        <tr th:each="review : ${reviews}">
+                            <td colspan="4" th:if="${review.getIndex() == null}">
+                                <div>댓글 내역이 없습니다.</div>
+                            </td>
+                            <td>
+                                <div th:text="${review.getMovieNm()}"></div>
+                            </td>
+                            <td>
+                                <div th:text="${review.getContent()}"></div>
+                            </td>
+                            <td>
+                                <div th:text="${review.getRating()}"></div>
+                            </td>
+                            <td>
+                                <div th:text="${#temporals.format(review.getCreatedAt(), 'yyyy-MM-dd HH:mm')}"></div>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="like-container">
+                <h2>좋아요한 영화</h2>
+                <div class="like-wrap">
+                    <table class="--obj-table">
+                        <thead>
+                        <tr>
+                            <th th:scope="col">영화 제목</th>
+                            <th th:scope="col">감독</th>
+                            <th th:scope="col">배우</th>
+                            <th th:scope="col">개봉일</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr th:if="${#lists.isEmpty(movieLikes)}">
+                            <td class="empty" colspan="4">좋아요한 영화가 없습니다.</td>
+                        </tr>
+                        <tr th:each="movieLike : ${movieLikes}">
+                            <td>
+                                <div th:text="${movieLike.getMovieNm()}">좋아요한 영화가 없습니다.</div>
+                            </td>
+                            <td>
+                                <div th:text="${movieLike.getDirectors()}"></div>
+                            </td>
+                            <td>
+                                <div th:text="${movieLike.getActors()}"></div>
+                            </td>
+                            <td>
+                                <div th:text="${movieLike.getOpenDt()}"></div>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<th:block th:replace="~{fragments/common-footer.html :: commonFooter}"></th:block>
+</body>
+</html>
